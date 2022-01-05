@@ -74,6 +74,26 @@
 | Convert a file from base64 back to its orig | ``echo f0VMR...SNIO...InmDwU | base64 -d > shell `` |
 | Check the file's md5sum to ensure it converted correctly | `` md5sum shell `` |
 
+## Pentesting iteration
+
+- Enumeration/Scanning with Nmap - perform a quick scan for open ports followed by a full port scan
+
+- Web Footprinting - check any identified web ports for running web applications, any hidden files/directories. Some useful tools for ths phase include whatweb and Gobuster
+
+- After identifying the technologies in use, use a tool such as Searchsploit to find public exploits or search on Google for manual exploitation techniques
+
+- Identifying the technologies in use, and use tools like Searchsploit to find public exploits or search on Google for manual exploitation techniques
+
+- After gaining an initial foothold, use the Python3 pty trick to upgrade to a pseudo TTY
+
+- Perform manual and automated enumeration of the file system looking for misconfigurations, services with known vulnerabilities, and sensitive data in cleartext such as credentials
+
+- Organize this data offline to determine the various ways to escalate privileges to root on this target
+
+- It's possible to gain a foothold by using Metasploit or manually
+
+- After obtaining a foothold, it's possible to escalate privilege to root on the target by using scripts such as LinEnum or LinPEAS. 
+
 ## Risk Management Process
 
 **- Identifying the Risk:**
@@ -127,3 +147,4 @@ Tous les composants utilisés par une application (bibliothèques, frameworks, m
 
 **- Insufficient Logging & monitoring:**
 Des lacunes dans la journalisation et la surveillance peuvent permettre à une attaque réussie de passer inaperçue, aux attaquants d'établir la persistance dans le réseau, ou de falsifier ou d'extraire des données sensibles sans se faire remarquer.
+
