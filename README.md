@@ -71,5 +71,59 @@
 | Start a local webserver | `` python3 -m http.server 8000	`` |
 | Transfer a file to the remote server with scp (requires SSH access) | `` scp linenum.sh user@remotehost:/tmp/linenum.sh	`` |
 | Convert a file to base64 | `` base64 shell -w 0	`` |
-| Convert a file from base64 back to its orig | `` echo f0VMR...SNIO...InmDwU | base64 -d > shell`` |
+| Convert a file from base64 back to its orig | ``echo f0VMR...SNIO...InmDwU | base64 -d > shell `` |
 | Check the file's md5sum to ensure it converted correctly | `` md5sum shell `` |
+
+## Risk Management Process
+
+**- Identifying the Risk:**
+Identifier les risques auxquels l'entreprise est exposée, tels que les risques juridiques, environnementaux, de marché, réglementaires et autres.
+
+**- Analyze the Risk:**
+Analyser les risques pour déterminer leur impact et leur probabilité. Les risques doivent être mis en correspondance avec les diverses politiques, procédures et processus opérationnels de l'organisation.
+
+**- Evaluate the Risk:**
+Évaluer, classer et hiérarchiser les risques. Ensuite, l'organisation doit décider d'accepter (inévitable), d'éviter (changer les plans), de contrôler (atténuer) ou de transférer le risque (assurer).
+
+**- Dealing with Risk:**
+Éliminer ou contenir au mieux les risques. Ceci est géré en s'interface directement avec les parties prenantes pour le système ou le processus auquel le risque est associé.
+
+**- Monitoring Risk:**
+Tous les risques doivent être surveillés en permanence. Les risques doivent être surveillés en permanence pour détecter tout changement de situation susceptible de modifier leur score d'impact, from low to medium or high impact.
+
+To do:
+- Re-setup une VM entre chaque client pour ne pas mélanger les clients.
+- On doit pouvoir setup une VM rapidement.
+
+## Top OWASP
+
+**- Injection:**
+Injection SQL, injection de commandes, injection LDAP, etc.
+
+**- Broken Auhtentification:**
+Les erreurs de configuration de l'authentification et de la gestion des sessions peuvent conduire à un accès non autorisé à une application par le biais d'attaques de devinette de mot de passe ou d'un délai d'expiration de session incorrect, entre autres problèmes.
+
+**- Sensitive Data Exposure:**
+Protéger de manière inappropriée les données telles que les informations financières, de santé ou personnellement identifiables.
+
+**- XML External Entities:**
+Processeurs XML mal configurés pouvant entraîner la divulgation de fichiers internes, l'analyse des ports, l'exécution de code à distance ou des attaques par déni de service.
+
+
+**- Broken Access control:**
+Les restrictions ne sont pas mises en œuvre de manière appropriée pour empêcher les utilisateurs d'accéder à d'autres comptes d'utilisateurs, d'afficher des données sensibles, d'accéder à des fonctionnalités non autorisées, de modifier des données, etc.
+
+**- Security misconfiguration:**
+Configurations par défaut non sécurisées, stockage en nuage ouvert, messages d'erreur verbeux qui divulguent trop d'informations.
+
+**- Cross-site Scripting XSS:**
+XSS se produit lorsqu'une application ne nettoie pas correctement les entrées fournies par l'utilisateur, permettant l'exécution de HTML ou de JavaScript dans le navigateur d'une victime. Cela peut entraîner un piratage de session, une dégradation du site Web, une redirection d'un utilisateur vers un site Web malveillant, etc.
+
+**- Insecure Deserialization:**
+Cette faille conduit souvent à l'exécution de code à distance, à des attaques par injection ou à des attaques par élévation de privilèges.
+
+**- Using component with known vulnerabilities:**
+Tous les composants utilisés par une application (bibliothèques, frameworks, modules logiciels) s'exécutent avec le même privilège que l'application. Si l'application utilise des composants présentant des défauts connus, cela peut entraîner l'exposition de données sensibles ou l'exécution de code à distance.
+
+**- Insufficient Logging & monitoring:**
+Des lacunes dans la journalisation et la surveillance peuvent permettre à une attaque réussie de passer inaperçue, aux attaquants d'établir la persistance dans le réseau, ou de falsifier ou d'extraire des données sensibles sans se faire remarquer.
