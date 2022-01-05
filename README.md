@@ -2,6 +2,8 @@
 
 ### sheetcheat
 
-Show our IP address		-> ``ifconfig/ip a``
+| Action        | Command      |
+| ------|-----|
+| Show our IP address | ``ifconfig/ip a`` |
 
 
