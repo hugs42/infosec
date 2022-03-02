@@ -41,6 +41,7 @@
  - [Nikto](https://github.com/sullo/nikto) - Web server scanner
  - [WPscan](https://github.com/wpscanteam/wpscan) - WPScan WordPress security scanner
  - [Cmsmap](https://github.com/Dionach/CMSmap) - CMSmap is a python open source CMS scanner that automates the process of detecting security flaws of the most popular CMSs.
+ - [Raccoon]() - 
 
 ### XSS scanner
  - [XSStrike](https://github.com/s0md3v/XSStrike) - Most advanced XSS scanner
@@ -92,19 +93,22 @@
  - [Cipher identifier](https://www.boxentriq.com/code-breaking/cipher-identifier) - Identify the type of cipher
  - [Dcode](https://www.dcode.fr/en) - Decoding messages
  - [Online barecode reader](https://online-barcode-reader.inliteresearch.com/) - Free online barecode reader
+ - [Cyberchef](https://gchq.github.io/CyberChef/) - A web app for encryption, encoding, compression and data analysis
 
 ### Forensic
  - [Usbrip](https://github.com/snovvcrash/usbrip) - Tracking history of USB events on GNU/Linux  
 
 ### Steganography
  - [LSB-steganography](https://github.com/RobinDavid/LSB-Steganography.git) - Python program to steganography files into images using the Least Significant Bit
- - [Stego-kit](https://github.com/DominicBreuker/stego-toolkit) - Collection of steganography tools - helps with CTF challenges
+ - [Stego-kit](https://github.com/DominicBreuker/stego-toolkit) - Collection of steganography tools
  - [Jset](https://github.com/lukechampine/jsteg) - JPEG steganography
  - [Zsteg](https://github.com/zed-0xff/zsteg) - Detect stegano-hidden data in PNG & BMP
  - [Sstv](https://github.com/colaclanth/sstv) - SSTV Decoder
  - [Slowrx](https://github.com/windytan/slowrx) - A decoder for Slow-Scanning Television (SSTV)
  - [Robot36](https://github.com/xdsopl/robot36.git) - Encode and decode images using SSTV in Robot 36 mode
 
+### Reverse engineering
+ - [Ida](https://hex-rays.com/ida-free/) - binary code analysis tool for reverse engineering
 
 ## Sheetcheat
 
@@ -125,12 +129,60 @@
 | Brute force SNMP secret string | `` onesixtyone -c dict.txt 10.10.10.40 `` |
 | Scan number of open ports | `` rustscan -a 10.10.10.10 -u 3000 `` |
 
+### Nmap Scanning Options
+| Description        | Command      |
+| ------ | ----- |
+| Disables port scanning | `` -sn `` |
+| Disables ICMP Echo Requests |`` -Pn ``|
+| Disables DNS Resolution.| `` -n `` |
+| Performs the ping scan by using ICMP Echo Requests against the target. |`` -PE `` |
+| Shows all packets sent and received | `` --packet-trace `` |
+| Displays the reason for a specific result | `` --reason ``|
+| Disables ARP Ping Requests | `` --disable-arp-ping `` |
+| Scans the specified top ports that have been defined as most frequent | `` --top-ports=<num> ``|
+| Scan all ports | `` -p- `` |
+| Scan all ports between 22 and 110 |`` -p22-110 `` s|
+| Scans only the specified ports 22 and 25 | `` -p22,25 `` |
+| Scans top 100 ports | `` -F `` |
+| Performs an TCP SYN-Scan | `` -sS `` |
+| Performs an TCP ACK-Scan | `` -sA `` |
+| Performs an UDP Scan | `` -sU `` |
+| Scans the discovered services for their versions | `` -sV `` |
+| Perform a Script Scan with scripts that are categorized as "default" | `` -sC `` |
+| Performs a Script Scan by using the specified scripts | `` --script <script> `` |
+| Performs an OS Detection Scan to determine the OS of the target | `` -O `` |
+| Performs OS Detection, Service Detection, and traceroute scans  |`` -A `` |
+| Sets the number of random Decoys that will be used to scan the target | `` -D RND:5 `` |
+| Specifies the network interface that is used for the scan | `` -e `` |
+| Specifies the source IP address for the scan | `` -S 10.10.10.200	`` |
+| Specifies the source port for the scan | `` -g `` |
+| DNS resolution is performed by using a specified name server | `` --dns-server <ns> `` |
+
+### Nmap Output Options
+| Description        | Command      |
+| ------ | ----- |
+| Stores the results in all available formats starting with the name of "filename" | `` -oA filename `` |
+| Stores the results in normal format with the name "filename" | `` -oN filename `` |
+| Stores the results in "grepable" format with the name of "filename" | `` -oG filename	`` |
+| Stores the results in XML format with the name of "filename" | `` -oX filename `` |
+
+### Nmap Performance Options
+| Description        | Command      |
+| ------ | ----- |
+| Sets the number of retries for scans of specific ports | `` --max-retries <num> `` |
+| Displays scan's status every 5 seconds | `` --stats-every=5s `` |
+| Displays verbose output during the scan | `` -v/-vv `` |
+| Sets the specified time value as initial RTT timeout | `` --initial-rtt-timeout 50ms `` |
+| Sets the specified time value as maximum RTT timeout | `` --max-rtt-timeout 100ms `` |
+| Sets the number of packets that will be sent simultaneously | `` --min-rate 300 `` |
+| Specifies the specific timing template | `` -T <0-5>	 `` |
+
 
 ### DNS Enumeration
 | Description        | Command      |
 | ------ | ----- |
 | Identify the A record for the target domain | `` nslookup $TARGET `` |
-| Identify the A record for the target domain |``nslookup -query=A $TARGET ``|
+| Identify the A record for the target domain | ``nslookup -query=A $TARGET `` |
 | Identify the A record for the target domain | `` dig $TARGET @<nameserver/IP>	 `` |
 | Identify the A record for the target domain |``dig a $TARGET @<nameserver/IP> ``|
 | Identify the PTR record for the target IP address | `` nslookup -query=PTR <IP>	`` |
@@ -192,8 +244,8 @@
 | Base64 decode | `` echo ENCODED_B64 \| base64 -d	`` |
 | Hex encode | `` echo VALUE \| xxd -p	 `` |
 | Hex decode | `` echo ENCODED_HEX \| xxd -p -r `` |
-| Rot13 encode | `` echo VALUE | tr 'A-Za-z' 'N-ZA-Mn-za-m' `` |
-| Rot13 decode | `` echo ENCODED_ROT13 | tr 'A-Za-z' 'N-ZA-Mn-za-m'	`` |
+| Rot13 encode | `` echo VALUE \| tr 'A-Za-z' 'N-ZA-Mn-za-m' `` |
+| Rot13 decode | `` echo ENCODED_ROT13 \| tr 'A-Za-z' 'N-ZA-Mn-za-m' `` |
 
 ### Fuzzing
 | Description        | Command      |
@@ -225,6 +277,7 @@
 | MSF: Search for public exploits in MSF | `` search exploit eternalblue `` |
 | MSF: Start using an MSF module | `` use exploit/windows/smb/ms17_010_psexec `` |
 | MSF: Show required options for an MSF module | `` show options `` |
+| MSF: Show advanced options for an MSF module | `` show advanced options `` |
 | MSF: Set a value for an MSF module option | `` set RHOSTS 10.10.10.40	 `` |
 | MSF: Test if the target server is vulnerable | `` check `` |
 | MSF: Run the exploit on the target server is vulnerable | `` exploit `` |
