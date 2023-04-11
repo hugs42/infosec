@@ -152,6 +152,8 @@
 | Scan SNMP on an IP | `` snmpwalk -v 2c -c public 10.10.10.40 1.3.6.1.2.1.1.5.0 `` |
 | Brute force SNMP secret string | `` onesixtyone -c dict.txt 10.10.10.40 `` |
 | Scan number of open ports | `` rustscan -a 10.10.10.10 -u 3000 `` |
+| Enumerate DNS information using dnsrecon | `` nmap --script=dns-zone-transfer -p 53 10.10.10.40 ``
+
 
 ### Nmap Scanning Options
 | Description        | Command      |
@@ -224,6 +226,26 @@
 | Description        | Command      |
 | ------ | ----- |
 | Waybackurls: crawling URLs from a domain with the date it was obtained. | `` waybackurls -dates https://$TARGET > waybackurls.txt`` |
+| DNS subdomain enumeration using knockpy	 | `` knockpy $TARGET -o subdomains.txt `` |
+| DNS subdomain enumeration using Sn0int	 | ``sn0int domain $TARGET -o subdomains.txt  `` |
+| DNS subdomain enumeration using Chaos	 | `` chaos -d $TARGET -o subdomains.txt `` |
+| DNS subdomain enumeration using Anubis	 | `` anubis -t $TARGET -o subdomains.txt `` |
+| DNS subdomain enumeration using Netcraft	 | ``curl -s "https://searchdns.netcraft.com/?restriction=site+contains&host=$TARGET `` |
+| Enumerate DNS information using dnschef	 | `` dnschef --nameserver 8.8.8.8 --domain $TARGET `` |
+| Enumerate DNS information using dnsmap	 | `` dnsmap $TARGET -w /usr/share/wordlists/dnsmap.txt -r output.txt `` |
+| Perform reverse IP lookup using HackerTarget	 | `` curl -s "https://api.hackertarget.com/reverseiplookup/?q=$TARGET `` |
+| Perform reverse IP lookup using ViewDNS | `` curl -s "https://api.viewdns.info/reverseip/?host=$TARGET&apikey=<API_KEY>&output=json `` |
+| Enumerate HTTP headers using hping3	 | `` hping3 -S -p 80 $TARGET -c 1 -q; hping3 -R -p 80 $TARGET -c 1 -q ``  |
+| Enumerate HTTP headers using wget	 | `` wget --spider --server-response http://$TARGE ``  |
+| Query DNS records using dnsrecon with wildcard support	 | `` dnsrecon -d $TARGET -D /usr/share/wordlists/dnsrecon/subdomains-top1mil-20000.txt -t brt -a -o subdomains.txt ``  |
+| Check for DNS zone transfers using dnsrecon	 | `` dnsrecon -d $TARGET -t axfr -o zone-transfer.txt ``  |
+| Enumerate DNS information using dnsbrute	 | `` dnsbrute $TARGET --file /usr/share/wordlists/dnsmap.txt -o subdomains.txt ``  |
+| Perform email harvesting using Metagoofil	 | `` metagoofil -d $TARGET -t pdf,doc,xls,ppt,docx,pptx,xlsx -l 100 -n 50 -o metagoofil.txt -f metagoofil.html ``  |
+| Query GitHub for sensitive data using GitMiner | `` gitminer -q '$TARGET' --github-token <access_token> -o gitminer.txt ``  |
+| Search for subdomains on Certificate Transparency Logs using CT-Exposer | `` ct-exposer -d $TARGET -o subdomains.txt ``  |
+| Perform a SSL certificate transparency log search using certspotter  | `` certspotter -d $TARGET -o subdomains.txt ``  |
+| Extract SSL certificate information using openssl	 | `` echo | openssl s_client -showcerts -servername $TARGET -connect $TARGET:443 2>/dev/null | openssl x509 -inform pem -noout -text ``  |
+|   | `` ``  |
 
 ### Active Infrastructure Identification
 | Description        | Command      |
@@ -232,6 +254,24 @@
 | Display HTTP headers of the target webserver |``curl -I "http://${TARGET}" ``|
 | Aquatone: makes screenshots of all subdomains in the subdomain.list |``cat subdomain.list \| aquatone -out ./aquatone -screenshot-timeout 1000 ``|
 | WAF Fingerprinting |`` wafw00f -v https://$TARGE ``|
+| Enumerate HTTP methods | `` nmap -p80 --script http-methods $TARGET `` |
+| Nikto vulnerability scanner | `` nikto -h https://$TARGET -output nikto.txt `` |
+| Nmap web server vulnerability scan | `` nmap -p 80,443 --script http-vuln-* $TARGET `` |
+| Scan for open ports using masscan	| `` masscan -p1-65535,U:1-65535 $TARGET --rate=1000 -oX masscan-output.xml `` |
+| SSL/TLS security testing using testssl.sh	| `` testssl.sh --color 0 --openssl-timeout 60 -U -E -f -p -y -H --phone-out $TARGET `` |
+| SSL/TLS security testing using sslyze	| `` sslyze --regular $TARGET --json_out sslyze_output.json `` | 
+| Eyewitness: Generate screenshots and HTML report from a list of URLs |  `` eyewitness -f urls.txt -d ./eyewitness --web  `` |
+| WPScan: WordPress vulnerability scanner | `` wpscan --url https://$TARGET --enumerate u --api-token <API_TOKEN> `` |
+| JoomScan: Joomla vulnerability scanner | `` joomscan -u https://$TARGET -ec `` |
+| Droopescan: CMS vulnerability scanner	| `` droopescan scan drupal -u https://$TARGET `` |
+| Scan for open ports using Unicornscan | `` unicornscan -msf -v -I $TARGET:a `` |
+| Gobuster: Directory brute forcing	| `` gobuster dir -u https://$TARGET -w /usr/share/wordlists/dirb/common.txt -o gobuster.txt ``|
+| Dirsearch: Directory brute forcing | `` dirsearch -u https://$TARGET -e php,asp,aspx,jsp,html -w /usr/share/wordlists/dirb/common.txt -o dirsearch.txt `` |
+| FFuF: Fuzzing for web content	| `` ffuf -u https://$TARGET/FUZZ -w /usr/share/wordlists/dirb/common.txt -o ffuf.txt `` |
+| Arachni: Web application security scanner	| `` arachni https://$TARGET --output-debug --report-save-path arachni_report.afr --audit-links --audit-forms --audit-cookies  `` |
+| Scan for open ports using Zmap | `` zmap -p 80 $TARGET_CIDR -o zmap_output.csv `` |
+| Xprobe2: OS fingerprinting using ICMP	| `` xprobe2 -v -p tcp:80:open $TARGET `` |
+| OS fingerprinting using p0f | `` OS fingerprinting using p0f `` |
 
 ### Passive Subdomain Enumeration
 | Description        | Command      |
@@ -245,11 +285,13 @@
 | TheHarvester: searching for subdomains and other information on the sources provided in the source.txt list | `` cat sources.txt \| while read source; do theHarvester -d "${TARGET}" -b $source -f "${source}-${TARGET}";done `` |
 | Sublist3r: to enumerate subdomains of specific domain | `` python sublist3r.py -d example.com ``|
 
+
 ### Active Subdomain Enumeration
 | Description        | Command      |
 | ------ | ----- |
 | Gobuster: bruteforcing subdomains | `` gobuster dns -q -r "${NS}" -d "${TARGET}" -w "${WORDLIST}" -p ./patterns.txt -o "gobuster_${TARGET}.txt" `` |
 | Zone Transfer using Nslookup against the target domain and its nameserver | ``nslookup -type=any -query=AXFR $TARGET nameserver.target.domain `` |
+
 
 ### Web Enumeration
 | Description        | Command      |
@@ -259,6 +301,8 @@
 | Grab website banner | `` curl -IL https://www.example.com `` |
 | List details about the webserver/certificates | `` whatweb 10.10.10.121 `` |
 | List potential directories in robots.txt | `` curl 10.10.10.121/robots.txt `` |
+| Perform a directory brute force using DirBuster | `` dirb http://10.10.10.40 /usr/share/wordlists/dirb/common.txt `` |
+|
 
 ### Encode / Decode
 | Description        | Command      |
