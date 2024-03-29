@@ -1,4 +1,41 @@
-# Infosec
+# InfoSec
+
+## WebApp Bug Hunting Process
+
+1.  Visit target's website
+2.  Use BultWith navigator extension
+3.  Get basic information like IP adresses
+4.  Whois lookup
+5.  Perform Github recon
+6.  Check for CNAME Records of those subdomains
+7.  Use WaybackUrls for urls
+8.  Check for CORS misconfiguration on WebApp's target
+9.  Check for Email Header Injection on reset password function
+10. ⁠⁠Check For SMTP and HOST Header Injection
+11. ⁠Check For IFRAME (For Clickjacking)
+12. ⁠⁠Check For Improper Access Control and Paranter Tampering
+13. Check Burp History for finding endpoint
+14. Use Arjun for finding hidden endpoints
+15. Check For CSRF
+16. Check For SSRF Parameters
+17. Check For XSS and SSTI
+18. Check Cryptography in Reset Password Token
+19. Check For Unicode Injection In Email Paramete
+20. Check For Bypassing Rate Limit :
+Headers :
+X-Originating-IP: IP
+X-Forwarded-For: IP
+X-Remote-IP: IP
+X-Remote-Addr: IP
+X-Client-IP: IP
+X-Forwarded-Host: IP
+21. Directory Brute-Force
+22. Check For HTTP Request Smuggling
+23. Check For Open Redirect Through WaybackURLs
+24. ⁠Check For Social-Signon Bypass
+25. Check For State Parameter in Social Sign-In & Check Whether it using multiple cookies injection.
+26. ⁠File-Upload CSRF, XSS, SSRF, RCE, LFI, XXE
+27. Buffer Overflows
 
 ## Tools
 
