@@ -1,5 +1,123 @@
 # InfoSec
 
+> ⚠️ **DISCLAIMER** ⚠️
+> 
+> This repository contains information and tools for **educational and defensive security purposes only**. 
+> All techniques, commands, and methodologies provided here are intended for:
+> - Authorized penetration testing
+> - Security research and education
+> - Defensive security implementations
+> - Vulnerability assessment with proper authorization
+> 
+> **IMPORTANT**: Always ensure you have explicit written permission before testing any techniques on systems you do not own. Unauthorized access to computer systems is illegal in most jurisdictions. The contributors and maintainers of this repository are not responsible for any misuse of the information provided.
+> 
+> Use this knowledge responsibly and ethically. Report vulnerabilities through appropriate channels and follow responsible disclosure practices.
+
+## Table of Contents
+
+- [WebApp Bug Hunting Process](#webapp-bug-hunting-process)
+- [Tools](#tools)
+  - [DNS](#dns)
+  - [Port Scanner](#port-scanner)
+  - [Brute Force Urls](#brute-force-urls)
+  - [Parameter Discovery](#parameter-discovery)
+  - [Passive Subdomains Enumeration](#passive-subdomains-enumeration)
+  - [Active Subdomains Enumeration](#active-subdomains-enumeration)
+  - [Passive Infrastructure Identification](#passive-infrastructure-identification)
+  - [Active Infrastructure Identification](#active-infrastructure-identification)
+  - [Web Server Scanner / Vulnerability Scanner](#web-server-scanner--vulnerability-scanner)
+  - [XSS Scanner](#xss-scanner)
+  - [Web Fuzzer](#web-fuzzer)
+  - [Web Proxies](#web-proxies)
+  - [SNMP](#snmp)
+  - [Password Cracking](#password-cracking)
+  - [Wordlists](#wordlists)
+  - [Obfuscation](#obfuscation)
+  - [Payloads Lists](#payloads-lists)
+  - [Exploits Databases](#exploits-databases)
+  - [Formatting](#formatting)
+  - [Encode / Decode](#encode--decode)
+  - [Forensic](#forensic)
+  - [Steganography](#steganography)
+  - [Reverse Engineering](#reverse-engineering)
+  - [Windows](#windows)
+  - [JWT / Authentication](#jwt--authentication)
+  - [Authorization Testing](#authorization-testing)
+  - [API Testing](#api-testing)
+  - [Cloud Security](#cloud-security)
+  - [Container Security](#container-security)
+  - [Infrastructure as Code](#infrastructure-as-code)
+  - [Secrets Detection](#secrets-detection)
+  - [Linux Post-Exploitation](#linux-post-exploitation)
+  - [Code Analysis](#code-analysis)
+  - [Mobile Security](#mobile-security)
+  - [Network Security](#network-security)
+  - [SIEM/Log Analysis](#siemlog-analysis)
+  - [DevSecOps](#devsecops)
+  - [Injection Testing](#injection-testing)
+  - [Advanced Web Testing](#advanced-web-testing)
+  - [HTTP Smuggling & Race Conditions](#http-smuggling--race-conditions)
+  - [OAST & Blind Testing](#oast--blind-testing)
+  - [Subdomain Takeover](#subdomain-takeover)
+  - [All-in-One Frameworks](#all-in-one-frameworks)
+  - [Container & Infrastructure Security](#container--infrastructure-security)
+  - [Kubernetes Security](#kubernetes-security)
+  - [Supply Chain Security](#supply-chain-security)
+  - [Log4Shell & Critical CVE Detection](#log4shell--critical-cve-detection)
+  - [Web3 & Blockchain Security](#web3--blockchain-security)
+  - [Zero Trust & Identity Security](#zero-trust--identity-security)
+  - [IoT & Hardware Security](#iot--hardware-security)
+  - [Email Security & Phishing](#email-security--phishing)
+  - [Infrastructure Drift & Compliance](#infrastructure-drift--compliance)
+  - [Advanced C2 & Post-Exploitation](#advanced-c2--post-exploitation)
+  - [AI/ML Model Security](#aiml-model-security)
+  - [Living-off-the-Land & LOLBAS](#living-off-the-land--lolbas)
+  - [Vulnerability Databases](#vulnerability-databases)
+- [Cheat Sheet](#cheat-sheet)
+  - [Ports And Service Scanning](#ports-and-service-scanning)
+  - [Nmap Scanning Options](#nmap-scanning-options)
+  - [Nmap Output Options](#nmap-output-options)
+  - [Nmap Performance Options](#nmap-performance-options)
+  - [DNS Enumeration](#dns-enumeration)
+  - [Passive Infrastructure Identification](#passive-infrastructure-identification-1)
+  - [Active Infrastructure Identification](#active-infrastructure-identification-1)
+  - [Passive Subdomain Enumeration](#passive-subdomain-enumeration)
+  - [Active Subdomain Enumeration](#active-subdomain-enumeration-1)
+  - [Web Enumeration](#web-enumeration)
+  - [Encode / Decode](#encode--decode-1)
+  - [Fuzzing](#fuzzing)
+  - [Wordlists](#wordlists-1)
+  - [Public exploit](#public-exploit)
+  - [Using Shells](#using-shells)
+  - [Privilege Escalation](#privilege-escalation)
+  - [Transferring Files](#transferring-files)
+  - [Using Curl](#using-curl)
+  - [XSS attacks](#xss-attacks)
+  - [Wordpress hacking](#wordpress-hacking)
+  - [Evasion & Bypass Techniques](#evasion--bypass-techniques)
+  - [Persistence & Lateral Movement](#persistence--lateral-movement)
+  - [Windows Commands](#windows-commands)
+  - [Digital Forensics & Incident Response](#digital-forensics--incident-response)
+  - [Malware Analysis & Reverse Engineering](#malware-analysis--reverse-engineering)
+  - [Threat Hunting & Detection](#threat-hunting--detection)
+  - [Advanced OSINT Techniques](#advanced-osint-techniques)
+  - [Security Compliance & Audit](#security-compliance--audit)
+  - [LLM Security & AI Attacks](#llm-security--ai-attacks)
+    - [OWASP Top 10 for Large Language Model Applications](#owasp-top-10-for-large-language-model-applications)
+    - [Advanced LLM Attack Techniques](#advanced-llm-attack-techniques)
+  - [Misc](#misc)
+- [Comprehensive Penetration Testing Methodology](#comprehensive-penetration-testing-methodology)
+  - [Phase 1: Pre-Engagement & Intelligence Gathering](#phase-1-pre-engagement--intelligence-gathering)
+  - [Phase 2: Scanning & Enumeration](#phase-2-scanning--enumeration)
+  - [Phase 3: Exploitation & Initial Access](#phase-3-exploitation--initial-access)
+  - [Phase 4: Post-Exploitation & Privilege Escalation](#phase-4-post-exploitation--privilege-escalation)
+  - [Phase 5: Lateral Movement & Domain Escalation](#phase-5-lateral-movement--domain-escalation)
+  - [Phase 6: Data Exfiltration & Impact Assessment](#phase-6-data-exfiltration--impact-assessment)
+  - [Phase 7: Reporting & Remediation](#phase-7-reporting--remediation)
+  - [Modern Attack Vectors Integration](#modern-attack-vectors-integration)
+- [Risk Management Process](#risk-management-process)
+- [Top OWASP](#top-owasp)
+
 ## WebApp Bug Hunting Process
 
 1.  Visit target's website
@@ -40,24 +158,48 @@ X-Forwarded-Host: IP
 ## Tools
 
 ### DNS
- - [Dnscan](https://github.com/rbsec/dnscan) - Dnscan is a python wordlist-based DNS subdomain scanner
+ - [Dnscan](https://github.com/rbsec/dnscan) - Python wordlist-based DNS subdomain scanner
+ - [Subfinder](https://github.com/projectdiscovery/subfinder) - Fast passive subdomain enumeration tool
+ - [Amass](https://github.com/owasp-amass/amass) - In-depth DNS enumeration and network mapping attack surface
+ - [dnsx](https://github.com/projectdiscovery/dnsx) - DNS toolkit for multi-purpose DNS queries with filtering support
+ - [puredns](https://github.com/trickest/puredns) - Fast domain resolver and subdomain bruteforcing with wildcard filtering
+ - [assetfinder](https://github.com/tomnomnom/assetfinder) - Find domains and subdomains related to a given domain
+ - [shuffledns](https://github.com/projectdiscovery/shuffledns) - Wrapper around massdns for subdomain enumeration
+ - [findomain](https://github.com/findomain/findomain) - Ultra-fast subdomain enumeration tool
+ - [chaos-client](https://github.com/projectdiscovery/chaos-client) - Go client to communicate with ProjectDiscovery Chaos dataset API
+ - [dnsgen](https://github.com/ProjectAnte/dnsgen) - Generate domain name permutations for subdomain enumeration
+ - [altdns](https://github.com/infosec-au/altdns) - Generate permutations, alterations and mutations of subdomains
 
 ### Port Scanner
  - [Nmap](https://github.com/nmap/nmap) - The Network Mapper
- - [Zmap](https://github.com/zmap/zmap) - ZMap is a fast single packet network scanner designed for Internet-wide network surveys
+ - [Zmap](https://github.com/zmap/zmap) - Fast single packet network scanner for Internet-wide network surveys
  - [Rustscan](https://github.com/RustScan/RustScan) - The modern port scanner
+ - [naabu](https://github.com/projectdiscovery/naabu) - Fast SYN/CONNECT/UDP port scanner written in Go
 
 ### Brute Force Urls
  - [gobuster](https://github.com/OJ/gobuster) - Directory/File, DNS and VHost busting tool written in Go
+ - [feroxbuster](https://github.com/epi052/feroxbuster) - Fast, simple, recursive content discovery tool written in Rust
+ - [gau](https://github.com/lc/gau) - Fetch known URLs from AlienVault's Open Threat Exchange, Common Crawl, and Wayback Machine
+ - [waymore](https://github.com/xnl-h4ck3r/waymore) - Find even more links from the Wayback Machine
+ - [hakrawler](https://github.com/hakluke/hakrawler) - Simple, fast web crawler designed for easy, quick discovery of endpoints and assets
+
+### Parameter Discovery
+ - [Arjun](https://github.com/s0md3v/Arjun) - HTTP parameter discovery suite
+ - [ParamSpider](https://github.com/devanshbatham/ParamSpider) - Mining parameters from dark corners of Web Archives
+ - [LinkFinder](https://github.com/GerbenJavado/LinkFinder) - Python script that finds endpoints in JavaScript files
+ - [subjs](https://github.com/lc/subjs) - Fetches javascript files from a list of URLS or subdomains
+ - [gf](https://github.com/tomnomnom/gf) - A wrapper around grep to avoid typing common patterns
+ - [qsreplace](https://github.com/tomnomnom/qsreplace) - Accept URLs on stdin, replace all query string values with a user-supplied value
+ - [unfurl](https://github.com/tomnomnom/unfurl) - Pull out bits of URLs provided on stdin
 
 ### Passive Subdomains Enumeration
  - [VirusTotal](https://www.virustotal.com/gui/home/upload) - Analyze suspicious files, domains, IPs and URLs to detect malware and other breaches
- - [Censys](https://censys.io/) - Censys continually scans the public IPv4 address space on 3,552+
+ - [Censys](https://censys.io/) - Internet-wide scanning and reconnaissance platform
  - [Crt.sh](https://crt.sh/) - Certificate search tool
  - [Sublist3r](https://github.com/aboul3la/Sublist3r) - Fast subdomains enumeration tool for penetration testers
  
 
-## Active Subdomains Enumeration
+### Active Subdomains Enumeration
  - [HackerTarget](https://hackertarget.com/zone-transfer/) - From attack surface discovery to vulnerability identification, actionable network intelligence for IT & security operations.
  - [Gobuster](https://github.com/OJ/gobuster) - Directory/File, DNS and VHost busting tool written in Go
  - [Omnisint](https://sonar.omnisint.io) - Rapid7's DNS Database easily searchable via a lightning fast API, with domains available in milliseconds
@@ -72,18 +214,26 @@ X-Forwarded-Host: IP
  - [Aquatone](https://github.com/michenriksen/aquatone) - A Tool for Domain Flyovers
  - [Wafw00f](https://github.com/EnableSecurity/wafw00f) - Identify and fingerprint Web Application Firewall products protecting a website.
  - [Wappalyzer](https://www.wappalyzer.com/) - Technology profiler, find out what websites are built with
+ - [httpx](https://github.com/projectdiscovery/httpx) - Fast and multi-purpose HTTP toolkit for web reconnaissance
+ - [katana](https://github.com/projectdiscovery/katana) - Next-generation crawling and spidering framework
+ - [gowitness](https://github.com/sensepost/gowitness) - Web screenshot utility using Chrome Headless
+ - [EyeWitness](https://github.com/RedSiege/EyeWitness) - Take screenshots of websites and provide server header info
 
 ### Web Server Scanner / Vulnerability Scanner
  - [OpenVAS](https://www.openvas.org/) - Powerful open source vulnerability scanner
  - [Nikto](https://github.com/sullo/nikto) - Web server scanner
  - [WPscan](https://github.com/wpscanteam/wpscan) - WPScan WordPress security scanner
- - [Cmsmap](https://github.com/Dionach/CMSmap) - CMSmap is a python open source CMS scanner that automates the process of detecting security flaws of the most popular CMSs.
+ - [Cmsmap](https://github.com/Dionach/CMSmap) - Python open source CMS scanner for detecting security flaws
  - [Raccoon](https://github.com/evyatarmeged/Raccoon) - Offensive security tool for reconnaissance and vulnerability scanning
+ - [Nuclei](https://github.com/projectdiscovery/nuclei) - Fast vulnerability scanner with community templates
+ - [Nuclei Templates](https://github.com/projectdiscovery/nuclei-templates) - Community curated list of templates for Nuclei
 
 ### XSS Scanner
  - [XSStrike](https://github.com/s0md3v/XSStrike) - Most advanced XSS scanner
- - [BruteXSS](https://github.com/rajeshmajumdar/BruteXSS) - BruteXSS is a tool written in python simply to find XSS vulnerabilities
- - [Xsser](https://github.com/epsylon/xsser) - Cross Site "Scripter" (aka XSSer) is an automatic -framework- to detect, exploit and report XSS vulnerabilities in web-based applications
+ - [BruteXSS](https://github.com/rajeshmajumdar/BruteXSS) - Python tool to find XSS vulnerabilities
+ - [Xsser](https://github.com/epsylon/xsser) - Automatic framework to detect, exploit and report XSS vulnerabilities
+ - [Dalfox](https://github.com/hahwul/dalfox) - Parameter analysis and XSS scanner based on Golang
+ - [CORScanner](https://github.com/chenjj/CORScanner) - Fast CORS misconfiguration vulnerabilities scanner
 
 ### Web Fuzzer
  - [Ffuf](https://github.com/ffuf/ffuf) - Fast web fuzzer written in Go
@@ -134,7 +284,7 @@ X-Forwarded-Host: IP
  - [Cyberchef](https://gchq.github.io/CyberChef/) - A web app for encryption, encoding, compression and data analysis
 
 ### Forensic
- - [Usbrip](https://github.com/snovvcrash/usbrip) - Tracking history of USB events on GNU/Linux  
+ - [Usbrip](https://github.com/snovvcrash/usbrip) - Tracking history of USB events on GNU/Linux
 
 ### Steganography
  - [LSB-steganography](https://github.com/RobinDavid/LSB-Steganography.git) - Python program to steganography files into images using the Least Significant Bit
@@ -149,28 +299,246 @@ X-Forwarded-Host: IP
  - [Ida](https://hex-rays.com/ida-free/) - binary code analysis tool for reverse engineering
 
 ### Windows
- - [Impacket](https://github.com/SecureAuthCorp/impacket) - Impacket is a collection of Python classes for working with network protocols
- - [Sysinternals](https://docs.microsoft.com/en-us/sysinternals) - Manage, troubleshoot and diagnose your Windows systems and applications
- - [PowerSploit](https://github.com/PowerShellMafia/PowerSploit) - A PowerShell Post-Exploitation Framework
- - [BloodHound](https://github.com/BloodHoundAD/BloodHound) - BloodHound uses graph theory to reveal the hidden and often unintended relationships within an Active Directory or Azure environment
+ - [Impacket](https://github.com/SecureAuthCorp/impacket) - Collection of Python classes for working with network protocols
+ - [Sysinternals](https://docs.microsoft.com/en-us/sysinternals) - Windows system management and troubleshooting utilities
+ - [PowerSploit](https://github.com/PowerShellMafia/PowerSploit) - PowerShell Post-Exploitation Framework
+ - [BloodHound](https://github.com/BloodHoundAD/BloodHound) - Active Directory reconnaissance tool using graph theory
+ - [Certipy](https://github.com/ly4k/Certipy) - Tool for Active Directory Certificate Services enumeration and abuse
+ - [Rubeus](https://github.com/GhostPack/Rubeus) - Toolset for raw Kerberos interaction and abuses
+ - [Kerbrute](https://github.com/ropnop/kerbrute) - Tool to quickly bruteforce and enumerate valid Active Directory accounts
+ - [NetExec](https://github.com/Pennyw0rth/NetExec) - Network service exploitation tool, successor to CrackmapExec
+- [SharpHound](https://github.com/BloodHoundAD/SharpHound) - C# data collector for BloodHound
+- [PowerView](https://github.com/PowerShellMafia/PowerSploit/blob/master/Recon/PowerView.ps1) - PowerShell tool for AD enumeration
+- [ADRecon](https://github.com/adrecon/ADRecon) - Active Directory reconnaissance tool
+- [PingCastle](https://www.pingcastle.com/) - Active Directory security audit tool
+- [CrackMapExec](https://github.com/Porchetta-Industries/CrackMapExec) - Network service exploitation tool
+- [Responder](https://github.com/SpiderLabs/Responder) - IPv6/IPv4 LLMNR/NBT-NS/mDNS poisoner
+- [Mimikatz](https://github.com/gentilkiwi/mimikatz) - Extract passwords, hash, PIN code and kerberos tickets
+- [LaZagne](https://github.com/AlessandroZ/LaZagne) - Retrieve passwords stored on a local computer
+- [SharpUp](https://github.com/GhostPack/SharpUp) - C# port of PowerUp for privilege escalation checks
+
+### JWT / Authentication
+ - [jwt_tool](https://github.com/ticarpi/jwt_tool) - Toolkit for validating, forging, scanning and tampering JWTs
+
+### Authorization Testing
+ - [Autorize](https://github.com/PortSwigger/autorize) - Burp extension for authorization testing
+ - [AuthMatrix](https://github.com/SecurityInnovation/AuthMatrix) - Burp extension for authorization testing in web applications
+
+
+### API Testing
+ - [Schemathesis](https://github.com/schemathesis/schemathesis) - Property-based testing tool for web APIs
+ - [RESTler](https://github.com/microsoft/restler-fuzzer) - Stateful REST API fuzzing tool from Microsoft
+ - [InQL](https://github.com/doyensec/inql) - Burp extension for GraphQL security testing
+ - [kiterunner](https://github.com/assetnote/kiterunner) - Contextual Content Discovery Tool for APIs and endpoints discovery
+ - [Graphw00f](https://github.com/doyensec/graphw00f) - GraphQL Server Engine Fingerprinting utility
+ - [graphql-cop](https://github.com/doyensec/graphql-cop) - GraphQL security auditing utility
+
+### Cloud Security
+ - [Trivy](https://github.com/aquasecurity/trivy) - Comprehensive security scanner for containers and other artifacts
+ - [Prowler](https://github.com/prowler-cloud/prowler) - Open source cloud security tool for AWS, Azure and GCP
+ - [CloudFox](https://github.com/BishopFox/cloudfox) - Cloud security assessment tool for multi-cloud environments
+ - [ScoutSuite](https://github.com/nccgroup/ScoutSuite) - Multi-Cloud Security Auditing Tool
+ - [Pacu](https://github.com/RhinoSecurityLabs/pacu) - AWS exploitation framework designed for testing the security of Amazon Web Services environments
+
+### Container Security
+ - [Syft](https://github.com/anchore/syft) - Generate Software Bill of Materials (SBOM) from container images
+ - [Grype](https://github.com/anchore/grype) - Vulnerability scanner for container images and filesystems
+ - [Dockle](https://github.com/goodwithtech/dockle) - Container image linter for security and best practices
+
+### Infrastructure as Code
+ - [Checkov](https://github.com/bridgecrewio/checkov) - Static code analysis tool for infrastructure-as-code
+ - [Terrascan](https://github.com/tenable/terrascan) - Detect security vulnerabilities in Infrastructure as Code
+
+
+### Secrets Detection
+ - [trufflehog](https://github.com/trufflesecurity/trufflehog) - Find credentials all over the place
+ - [Gitleaks](https://github.com/gitleaks/gitleaks) - Detect and prevent secrets in git repos
+
+### Linux Post-Exploitation
+ - [pspy](https://github.com/DominicBreuker/pspy) - Monitor linux processes without root permissions
+ - [Linux Exploit Suggester 2](https://github.com/jondonas/linux-exploit-suggester-2) - Find exploits for local privilege escalation vulnerabilities
 
 ### Code Analysis
- - [GitGuardian](https://www.gitguardian.com) - GitGuardian is the code security platform for the DevOps generation
- - [Synk](https://snyk.io/) - Find and automatically fix vulnerabilities in your code
+ - [GitGuardian](https://www.gitguardian.com) - Code security platform for DevOps
+ - [Snyk](https://snyk.io/) - Find and automatically fix vulnerabilities in your code
+ - [Semgrep](https://github.com/semgrep/semgrep) - Static analysis tool for finding bugs, security issues, and anti-patterns
+ - [CodeQL](https://github.com/github/codeql) - Semantic code analysis engine for finding security vulnerabilities
+ - [SonarQube](https://www.sonarqube.org/) - Platform for continuous inspection of code quality and security
+
+### Mobile Security
+ - [MobSF](https://github.com/MobSF/Mobile-Security-Framework-MobSF) - Mobile Security Framework for Android/iOS security testing
+ - [QARK](https://github.com/linkedin/qark) - Quick Android Review Kit for security vulnerabilities
+ - [Frida](https://frida.re/) - Dynamic instrumentation toolkit for developers, reverse-engineers, and security researchers
+ - [Objection](https://github.com/sensepost/objection) - Runtime mobile exploration toolkit for iOS and Android
+ - [jadx](https://github.com/skylot/jadx) - Dex to Java decompiler for Android APK analysis
+
+### Network Security
+ - [Wireshark](https://www.wireshark.org/) - Network packet analyzer
+ - [tcpdump](https://www.tcpdump.org/) - Command-line packet analyzer
+ - [Ngrep](https://github.com/jpr5/ngrep) - Network packet analyzer showing data matched by regular expressions
+ - [Scapy](https://scapy.net/) - Packet manipulation program written in Python
+
+### SIEM/Log Analysis
+ - [Elastic Stack](https://www.elastic.co/elastic-stack/) - Search and analytics engine for all types of data
+ - [Splunk](https://www.splunk.com/) - Platform for searching, monitoring, and analyzing machine-generated data
+ - [Graylog](https://www.graylog.org/) - Log management platform
+ - [OSSEC](https://www.ossec.net/) - Host-based intrusion detection system
+
+### DevSecOps
+ - [Bandit](https://github.com/PyCQA/bandit) - Security linter for Python code
+ - [Brakeman](https://github.com/presidentbeef/brakeman) - Static analysis security scanner for Ruby on Rails
+ - [ESLint Security Plugin](https://github.com/eslint-community/eslint-plugin-security) - ESLint rules for Node.js security
+ - [Safety](https://github.com/pyupio/safety) - Check Python dependencies for known vulnerabilities
+
+### Injection Testing
+ - [sqlmap](https://github.com/sqlmapproject/sqlmap) - Automatic SQL injection and database takeover tool
+ - [NoSQLMap](https://github.com/codingo/NoSQLMap) - Automated NoSQL database enumeration and web application exploitation tool
+ - [tplmap](https://github.com/epinna/tplmap) - Server-Side Template Injection and Code Injection Detection and Exploitation Tool
+ - [SSTImap](https://github.com/vladko312/SSTImap) - Automatic SSTI detection tool with interactive interface
+
+### Advanced Web Testing
+ - [kxss](https://github.com/tomnomnom/hacks/tree/master/kxss) - A tool for identifying potentially interesting server-side request forgery (XSS) problems
+ - [OpenRedireX](https://github.com/devanshbatham/OpenRedireX) - A fuzzer for detecting open redirect vulnerabilities
+ - [Corsy](https://github.com/s0md3v/Corsy) - CORS Misconfiguration Scanner
+ - [CORScanner](https://github.com/chenjj/CORScanner) - Fast CORS misconfiguration vulnerabilities scanner
+
+### HTTP Smuggling & Race Conditions
+ - [HTTP Request Smuggler](https://github.com/PortSwigger/http-request-smuggler) - Burp extension for finding HTTP Request Smuggling vulnerabilities
+ - [h2csmuggler](https://github.com/BishopFox/h2csmuggler) - HTTP/2 Cleartext (h2c) smuggling tool
+ - [smuggler](https://github.com/defparam/smuggler) - HTTP Request Smuggling detection tool written in Python
+ - [Turbo Intruder](https://github.com/PortSwigger/turbo-intruder) - Burp Suite extension for sending large numbers of HTTP requests
+ - [Race-The-Web](https://github.com/TheHackerDev/race-the-web) - Tests for race conditions in web applications
+ - [Param Miner](https://github.com/PortSwigger/param-miner) - Burp extension for identifying hidden, unlinked parameters
+
+### OAST & Blind Testing
+ - [Interactsh](https://github.com/projectdiscovery/interactsh) - Out of band application security testing toolkit designed for detecting blind vulnerabilities
+ - [Gopherus](https://github.com/tarunkant/Gopherus) - Tool to generate gopher link for exploiting SSRF and gaining RCE
+ - [XSS Hunter](https://github.com/mandatoryprogrammer/xsshunter) - Service for finding blind XSS vulnerabilities
+ - [xsshunter-express](https://github.com/mandatoryprogrammer/xsshunter-express) - XSS Hunter Express: The fastest way to set up XSS Hunter
+
+### Subdomain Takeover
+ - [subzy](https://github.com/LukaSikic/subzy) - Subdomain takeover vulnerability checker
+
+### All-in-One Frameworks
+ - [Osmedeus](https://github.com/j3ssie/osmedeus) - Fully automated offensive security framework for reconnaissance and vulnerability scanning
+ - [xray](https://github.com/chaitin/xray) - Security assessment tool for web vulnerabilities
+
+### Container & Infrastructure Security
+ - [Hadolint](https://github.com/hadolint/hadolint) - Dockerfile linter, validate inline bash, written in Haskell
+ - [detect-secrets](https://github.com/Yelp/detect-secrets) - Preventing secrets from getting checked in
+ - [git-secrets](https://github.com/awslabs/git-secrets) - Prevents committing secrets to a git repository
+ - [Syft](https://github.com/anchore/syft) - CLI tool for generating a Software Bill of Materials (SBOM) from container images and filesystems
+ - [Grype](https://github.com/anchore/grype) - Vulnerability scanner for container images and filesystems
+ - [cdxgen](https://github.com/CycloneDX/cdxgen) - Creates CycloneDX Software Bill of Materials (SBOM) for your projects
+
+### Kubernetes Security
+ - [kube-bench](https://github.com/aquasecurity/kube-bench) - Check whether Kubernetes is deployed according to security best practices
+ - [kube-hunter](https://github.com/aquasecurity/kube-hunter) - Hunt for security weaknesses in Kubernetes clusters
+
+### Supply Chain Security
+ - [Dependency-Track](https://github.com/DependencyTrack/dependency-track) - Open source component analysis platform for identifying and reducing risk
+ - [FOSSA](https://fossa.com/) - License compliance and vulnerability management for third-party code
+ - [Snyk Open Source](https://snyk.io/product/open-source-security-management/) - Developer security platform for finding and fixing vulnerabilities
+ - [WhiteSource Bolt](https://www.whitesourcesoftware.com/free-developer-tools/bolt/) - Free security and license compliance tool for developers
+ - [GitHub Dependabot](https://github.com/dependabot) - Automated dependency updates and security alerts
+ - [npm audit](https://docs.npmjs.com/cli/v8/commands/npm-audit) - Security auditing for npm packages
+ - [Yarn audit](https://classic.yarnpkg.com/en/docs/cli/audit/) - Security auditing for Yarn packages
+ - [pip-audit](https://github.com/pypa/pip-audit) - Audit Python packages for known security vulnerabilities
+
+### Log4Shell & Critical CVE Detection
+ - [log4j-scan](https://github.com/fullhunt/log4j-scan) - Log4Shell (CVE-2021-44228) vulnerability scanner
+ - [Huntress Log4Shell Scanner](https://github.com/huntresslabs/log4shell-tester) - Log4Shell vulnerability detection utility
+ - [log4shell-detector](https://github.com/mergebase/log4shell-detector) - Scanner for Log4Shell vulnerability across multiple platforms
+ - [logpresso-scanner](https://github.com/logpresso/CVE-2021-44228-Scanner) - Log4j2 CVE-2021-44228 vulnerability scanner
+ - [log4j2-scan](https://github.com/logpresso/CVE-2021-44228-Scanner) - Comprehensive Log4j2 vulnerability scanner
+
+### Web3 & Blockchain Security
+ - [MythX](https://mythx.io/) - Security analysis service for Ethereum smart contracts
+ - [Slither](https://github.com/crytic/slither) - Static analysis framework for Solidity smart contracts
+ - [Echidna](https://github.com/crytic/echidna) - Property-based fuzz testing framework for Ethereum smart contracts
+ - [Manticore](https://github.com/trailofbits/manticore) - Symbolic execution tool for smart contracts and binaries
+ - [Oyente](https://github.com/melonproject/oyente) - Security analysis tool for Ethereum smart contracts
+ - [Securify](https://securify.chainsecurity.com/) - Security scanner for Ethereum smart contracts
+ - [Consensys Diligence](https://consensys.net/diligence/) - Smart contract security auditing tools
+ - [Remix IDE](https://remix.ethereum.org/) - Web-based IDE for Ethereum smart contract development with security plugins
+
+### Zero Trust & Identity Security
+ - [BeyondTrust](https://www.beyondtrust.com/) - Privileged access management and zero trust solutions
+ - [Okta](https://www.okta.com/) - Identity and access management platform
+ - [Auth0](https://auth0.com/) - Identity platform for application builders
+ - [Ping Identity](https://www.pingidentity.com/) - Identity security platform
+ - [CyberArk](https://www.cyberark.com/) - Privileged access security solutions
+ - [Keycloak](https://www.keycloak.org/) - Open source identity and access management
+ - [FreeIPA](https://www.freeipa.org/) - Identity management system for Linux/UNIX environments
+ - [LDAP Admin Tools](https://ldapadmin.org/) - LDAP administration and management utilities
+
+### IoT & Hardware Security
+ - [Firmware Analysis Toolkit](https://github.com/attify/firmware-analysis-toolkit) - Toolkit for firmware security analysis
+ - [Binwalk](https://github.com/ReFirmLabs/binwalk) - Firmware analysis tool for extracting and analyzing firmware images
+ - [FACT](https://github.com/fkie-cad/FACT_core) - Firmware Analysis and Comparison Tool
+ - [IoTSeeker](https://github.com/rapid7/IoTSeeker) - Tool for identifying IoT devices on networks
+ - [Routersploit](https://github.com/threat9/routersploit) - Exploitation framework for embedded devices
+ - [Firmadyne](https://github.com/firmadyne/firmadyne) - Platform for emulation and dynamic analysis of Linux firmware
+ - [Hardware Hacking Toolkit](https://github.com/adi0x90/attifyos) - Distribution for hardware security assessment
+
+### Email Security & Phishing
+ - [Gophish](https://github.com/gophish/gophish) - Open-source phishing toolkit for security awareness
+ - [King Phisher](https://github.com/rsmusllp/king-phisher) - Phishing campaign toolkit for security training
+ - [Evilginx2](https://github.com/kgretzky/evilginx2) - Standalone man-in-the-middle attack framework for phishing
+ - [SPF Record Checker](https://mxtoolbox.com/spf.aspx) - Tool for validating SPF records
+ - [DMARC Analyzer](https://mxtoolbox.com/dmarc.aspx) - DMARC policy analysis tool
+ - [PhishTank](https://www.phishtank.com/) - Community site for verified phishing sites
+ - [VirusTotal](https://www.virustotal.com/) - URL and email analysis platform
+ - [Hybrid Analysis](https://www.hybrid-analysis.com/) - Free malware analysis service
+
+### Infrastructure Drift & Compliance
+ - [Driftctl](https://github.com/snyk/driftctl) - Detect, track and alert on infrastructure drift
+ - [InSpec](https://github.com/inspec/inspec) - Open-source testing framework for infrastructure
+ - [Chef InSpec](https://www.chef.io/products/chef-inspec/) - Compliance and security testing framework
+ - [Terraform Compliance](https://github.com/terraform-compliance/cli) - BDD testing framework for Terraform
+ - [Open Policy Agent](https://www.openpolicyagent.org/) - General-purpose policy engine for cloud native environments
+ - [Falco](https://github.com/falcosecurity/falco) - Runtime security monitoring for containers and Kubernetes
+ - [Tracee](https://github.com/aquasecurity/tracee) - Runtime security and forensics using eBPF
+
+### Advanced C2 & Post-Exploitation
+ - [Covenant](https://github.com/cobbr/Covenant) - .NET command and control framework
+ - [Sliver](https://github.com/BishopFox/sliver) - Adversary emulation/red team framework
+ - [PoshC2](https://github.com/nettitude/PoshC2) - Proxy aware C2 framework for red teaming
+ - [Empire](https://github.com/BC-SECURITY/Empire) - PowerShell and Python post-exploitation agent
+ - [Merlin](https://github.com/Ne0nd0g/merlin) - Cross-platform post-exploitation HTTP/2 Command & Control server
+ - [Mythic](https://github.com/its-a-feature/Mythic) - Cross-platform, post-exploit, red teaming framework
+ - [Koadic](https://github.com/zerosum0x0/koadic) - Windows post-exploitation rootkit similar to other penetration testing tools
+
+### AI/ML Model Security
+ - [Adversarial Robustness Toolbox](https://github.com/Trusted-AI/adversarial-robustness-toolbox) - Library for adversarial attacks and defenses for machine learning models
+ - [CleverHans](https://github.com/cleverhans-lab/cleverhans) - Library for benchmarking vulnerability of machine learning systems to adversarial examples
+ - [Foolbox](https://github.com/bethgelab/foolbox) - Python toolbox to create adversarial examples for neural networks
+ - [TextAttack](https://github.com/QData/TextAttack) - Framework for adversarial attacks, data augmentation, and model training in NLP
+ - [Model Scanning](https://github.com/protectai/modelscan) - Protection against Model Serialization Attacks
+ - [AI Red Team](https://github.com/anthropics/airt) - Tools and techniques for AI system security assessment
+
+### Living-off-the-Land & LOLBAS
+ - [LOLBAS Project](https://lolbas-project.github.io/) - Living Off The Land Binaries And Scripts for Windows
+ - [GTFOBins](https://gtfobins.github.io/) - Curated list of Unix binaries for bypassing security restrictions
+ - [LOLDrivers](https://www.loldrivers.io/) - Open-source project bringing together vulnerable, malicious, or maliciously used Windows drivers
+ - [WMIC](https://docs.microsoft.com/en-us/windows/win32/wmisdk/wmic) - Windows Management Instrumentation Command-line tool
+ - [CertUtil](https://docs.microsoft.com/en-us/windows-server/administration/windows-commands/certutil) - Certificate utility for downloading and encoding files
+ - [PowerShell Empire Modules](https://github.com/BC-SECURITY/Empire) - Living-off-the-land PowerShell modules
+ - [Living Off The Land Techniques](https://attack.mitre.org/techniques/T1218/) - MITRE ATT&CK framework reference
 
 ### Vulnerability Databases
- - [Mitre](https://cve.mitre.org/) - The mission of the CVE® Program is to identify, define, and catalog publicly disclosed cybersecurity vulnerabilities
- - [ExploitDB](https://www.exploit-db.com/) - Search Exploit Database for Exploits, Papers, and Shellcode
- - [Vulndb](https://vulndb.cyberriskanalytics.com/) - Number one vulnerability database documenting and explaining security vulnerabilities, threats, and exploits since 1970
- - [CVE-details](https://www.cvedetails.com/) - Free CVE security vulnerability database/information source
- - [NVD-Nist](https://nvd.nist.gov/) - The NVD is the U.S. government repository of standards based vulnerability management data represented using the Security Content Automation Protocol (SCAP)
+ - [Mitre](https://cve.mitre.org/) - CVE database for publicly disclosed cybersecurity vulnerabilities
+ - [ExploitDB](https://www.exploit-db.com/) - Exploit database for vulnerabilities, papers, and shellcode
+ - [Vulndb](https://vulndb.cyberriskanalytics.com/) - Comprehensive vulnerability database for security threats and exploits
+ - [CVE-details](https://www.cvedetails.com/) - CVE security vulnerability database and information source
+ - [NVD-Nist](https://nvd.nist.gov/) - U.S. government repository of vulnerability management data using SCAP
 
 ## Cheat Sheet
 
 ### Ports And Service Scanning
 | Description        | Command      |
 | ------ | ----- |
-| Show our IP address | ``ifconfig/ip a `` |
+| Show our IP address | `` ifconfig/ip a `` |
 | Check if a host is up | `` sudo nmap 10.129.2.18 -sn -oA host `` |
 | Run nmap on an IP | `` nmap 10.10.10.40 `` |
 | Scan network range | `` sudo nmap 10.129.2.0/24 -sn -oA tnet | grep for | cut -d" " -f5 `` |
@@ -189,7 +557,7 @@ X-Forwarded-Host: IP
 | Scan SNMP on an IP | `` snmpwalk -v 2c -c public 10.10.10.40 1.3.6.1.2.1.1.5.0 `` |
 | Brute force SNMP secret string | `` onesixtyone -c dict.txt 10.10.10.40 `` |
 | Scan number of open ports | `` rustscan -a 10.10.10.10 -u 3000 `` |
-| Enumerate DNS information using dnsrecon | `` nmap --script=dns-zone-transfer -p 53 10.10.10.40 ``
+| Enumerate DNS information using dnsrecon | `` nmap --script=dns-zone-transfer -p 53 10.10.10.40 `` |
 
 
 ### Nmap Scanning Options
@@ -288,11 +656,11 @@ X-Forwarded-Host: IP
 | DNS subdomain enumeration using Sn0int	 | ``sn0int domain $TARGET -o subdomains.txt  `` |
 | DNS subdomain enumeration using Chaos	 | `` chaos -d $TARGET -o subdomains.txt `` |
 | DNS subdomain enumeration using Anubis	 | `` anubis -t $TARGET -o subdomains.txt `` |
-| DNS subdomain enumeration using Netcraft	 | ``curl -s "https://searchdns.netcraft.com/?restriction=site+contains&host=$TARGET `` |
+| DNS subdomain enumeration using Netcraft	 | ``curl -s "https://searchdns.netcraft.com/?restriction=site+contains&host=$TARGET" `` |
 | Enumerate DNS information using dnschef	 | `` dnschef --nameserver 8.8.8.8 --domain $TARGET `` |
 | Enumerate DNS information using dnsmap	 | `` dnsmap $TARGET -w /usr/share/wordlists/dnsmap.txt -r output.txt `` |
-| Perform reverse IP lookup using HackerTarget	 | `` curl -s "https://api.hackertarget.com/reverseiplookup/?q=$TARGET `` |
-| Perform reverse IP lookup using ViewDNS | `` curl -s "https://api.viewdns.info/reverseip/?host=$TARGET&apikey=<API_KEY>&output=json `` |
+| Perform reverse IP lookup using HackerTarget	 | `` curl -s "https://api.hackertarget.com/reverseiplookup/?q=$TARGET" `` |
+| Perform reverse IP lookup using ViewDNS | `` curl -s "https://api.viewdns.info/reverseip/?host=$TARGET&apikey=<API_KEY>&output=json" `` |
 | Enumerate HTTP headers using hping3	 | `` hping3 -S -p 80 $TARGET -c 1 -q; hping3 -R -p 80 $TARGET -c 1 -q ``  |
 | Enumerate HTTP headers using wget	 | `` wget --spider --server-response http://$TARGET ``  |
 | Query DNS records using dnsrecon with wildcard support	 | `` dnsrecon -d $TARGET -D /usr/share/wordlists/dnsrecon/subdomains-top1mil-20000.txt -t brt -a -o subdomains.txt ``  |
@@ -353,7 +721,7 @@ X-Forwarded-Host: IP
 | Reverse DNS lookup of a CIDR range | `` curl -s https://sonar.omnisint.io/reverse/{ip}/{mask} \| jq -r '.[]' \| sort -u `` |
 | Certificate Transparency | ``curl -s "https://crt.sh/?q=${TARGET}&output=json" \| jq -r '.[] \| "\(.name_value)\n\(.common_name)"' \| sort -u `` |
 | TheHarvester: searching for subdomains and other information on the sources provided in the source.txt list | `` cat sources.txt \| while read source; do theHarvester -d "${TARGET}" -b $source -f "${source}-${TARGET}";done `` |
-| Sublist3r: to enumerate subdomains of specific domain | `` python sublist3r.py -d example.com ``|
+| Sublist3r: to enumerate subdomains of specific domain | `` python sublist3r.py -d example.com `` |
 
 
 ### Active Subdomain Enumeration
