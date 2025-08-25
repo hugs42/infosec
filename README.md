@@ -307,15 +307,15 @@ X-Forwarded-Host: IP
  - [Rubeus](https://github.com/GhostPack/Rubeus) - Toolset for raw Kerberos interaction and abuses
  - [Kerbrute](https://github.com/ropnop/kerbrute) - Tool to quickly bruteforce and enumerate valid Active Directory accounts
  - [NetExec](https://github.com/Pennyw0rth/NetExec) - Network service exploitation tool, successor to CrackmapExec
-- [SharpHound](https://github.com/BloodHoundAD/SharpHound) - C# data collector for BloodHound
-- [PowerView](https://github.com/PowerShellMafia/PowerSploit/blob/master/Recon/PowerView.ps1) - PowerShell tool for AD enumeration
-- [ADRecon](https://github.com/adrecon/ADRecon) - Active Directory reconnaissance tool
-- [PingCastle](https://www.pingcastle.com/) - Active Directory security audit tool
-- [CrackMapExec](https://github.com/Porchetta-Industries/CrackMapExec) - Network service exploitation tool
-- [Responder](https://github.com/SpiderLabs/Responder) - IPv6/IPv4 LLMNR/NBT-NS/mDNS poisoner
-- [Mimikatz](https://github.com/gentilkiwi/mimikatz) - Extract passwords, hash, PIN code and kerberos tickets
-- [LaZagne](https://github.com/AlessandroZ/LaZagne) - Retrieve passwords stored on a local computer
-- [SharpUp](https://github.com/GhostPack/SharpUp) - C# port of PowerUp for privilege escalation checks
+ - [SharpHound](https://github.com/BloodHoundAD/SharpHound) - C# data collector for BloodHound
+ - [PowerView](https://github.com/PowerShellMafia/PowerSploit/blob/master/Recon/PowerView.ps1) - PowerShell tool for AD enumeration
+ - [ADRecon](https://github.com/adrecon/ADRecon) - Active Directory reconnaissance tool
+ - [PingCastle](https://www.pingcastle.com/) - Active Directory security audit tool
+ - [CrackMapExec](https://github.com/Porchetta-Industries/CrackMapExec) - Network service exploitation tool
+ - [Responder](https://github.com/SpiderLabs/Responder) - IPv6/IPv4 LLMNR/NBT-NS/mDNS poisoner
+ - [Mimikatz](https://github.com/gentilkiwi/mimikatz) - Extract passwords, hash, PIN code and kerberos tickets
+ - [LaZagne](https://github.com/AlessandroZ/LaZagne) - Retrieve passwords stored on a local computer
+ - [SharpUp](https://github.com/GhostPack/SharpUp) - C# port of PowerUp for privilege escalation checks
 
 ### JWT / Authentication
  - [jwt_tool](https://github.com/ticarpi/jwt_tool) - Toolkit for validating, forging, scanning and tampering JWTs
@@ -545,9 +545,9 @@ X-Forwarded-Host: IP
 | Run an nmap script scan on an IP | `` nmap -sV -sC -p- -v 10.10.10.40 `` |
 | Run an nmap script scan for UDP with OS detection | `` nmap -sUV -T4 10.10.10.40 `` |
 | Run an nmap script scan for top 100 udp ports | `` sudo nmap -F -sU 10.10.10.10 `` |
-| Run a faster nmap script scan for UDP |  `` nmap -sUV -T4 -F --version-intensity 0 10.10.10.40 `` |
-| Run an nmap script on top 10 ports| `` sudo nmap 10.10.10.10 --top-ports=10 `` |
-| Track packets with SYN flags on port 21| `` sudo nmap 10.10.10.10 -p 21 --packet-trace -Pn -n --disable-arp-ping `` |
+| Run a faster nmap script scan for UDP | `` nmap -sUV -T4 -F --version-intensity 0 10.10.10.40 `` |
+| Run an nmap script on top 10 ports | `` sudo nmap 10.10.10.10 --top-ports=10 `` |
+| Track packets with SYN flags on port 21 | `` sudo nmap 10.10.10.10 -p 21 --packet-trace -Pn -n --disable-arp-ping `` |
 | Track packets on a previously filtered port | `` sudo nmap 10.10.10.10 -p 139 --packet-trace -n --disable-arp-ping -Pn `` |
 | List various available nmap scripts | `` locate scripts/citrix `` |
 | Run an nmap script on an IP | `` nmap --script smb-os-discovery.nse -p445 10.10.10.40 `` |
@@ -615,7 +615,7 @@ X-Forwarded-Host: IP
 | Sets the specified time value as initial RTT timeout | `` --initial-rtt-timeout 50ms `` |
 | Sets the specified time value as maximum RTT timeout | `` --max-rtt-timeout 100ms `` |
 | Sets the number of packets that will be sent simultaneously | `` --min-rate 300 `` |
-| Specifies the specific timing template | `` -T <0-5>	 `` |
+| Specifies the specific timing template | `` -T <0-5> `` |
 
 
 ### DNS Enumeration
@@ -695,10 +695,10 @@ X-Forwarded-Host: IP
 | Enumerate HTTP methods | `` nmap -p80 --script http-methods $TARGET `` |
 | Nikto vulnerability scanner | `` nikto -h https://$TARGET -output nikto.txt `` |
 | Nmap web server vulnerability scan | `` nmap -p 80,443 --script http-vuln-* $TARGET `` |
-| Scan for open ports using masscan	| `` masscan -p1-65535,U:1-65535 $TARGET --rate=1000 -oX masscan-output.xml `` |
-| SSL/TLS security testing using testssl.sh	| `` testssl.sh --color 0 --openssl-timeout 60 -U -E -f -p -y -H --phone-out $TARGET `` |
-| SSL/TLS security testing using sslyze	| `` sslyze --regular $TARGET --json_out sslyze_output.json `` | 
-| Eyewitness: Generate screenshots and HTML report from a list of URLs |  `` eyewitness -f urls.txt -d ./eyewitness --web  `` |
+| Scan for open ports using masscan | `` masscan -p1-65535,U:1-65535 $TARGET --rate=1000 -oX masscan-output.xml `` |
+| SSL/TLS security testing using testssl.sh | `` testssl.sh --color 0 --openssl-timeout 60 -U -E -f -p -y -H --phone-out $TARGET `` |
+| SSL/TLS security testing using sslyze | `` sslyze --regular $TARGET --json_out sslyze_output.json `` |
+| Eyewitness: Generate screenshots and HTML report from a list of URLs | `` eyewitness -f urls.txt -d ./eyewitness --web `` |
 | WPScan: WordPress vulnerability scanner | `` wpscan --url https://$TARGET --enumerate u --api-token <API_TOKEN> `` |
 | JoomScan: Joomla vulnerability scanner | `` joomscan -u https://$TARGET -ec `` |
 | Droopescan: CMS vulnerability scanner	| `` droopescan scan drupal -u https://$TARGET `` |
